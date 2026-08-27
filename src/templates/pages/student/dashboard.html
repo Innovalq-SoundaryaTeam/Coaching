@@ -1,0 +1,133 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <h1 class="h3 mb-1">Welcome back, {{ user.name.split(' ')[0] }} 👋</h1>
+    <p class="text-muted mb-0">{{ user.course }} · Here's how your prep is going.</p>
+  </div>
+  <a href="tests.html" class="btn btn-gradient"><i class="bi bi-play-circle me-2"></i>Attempt a Mock Test</a>
+</div>
+
+<!-- STAT WIDGETS -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(var(--ap-primary-rgb),.12); color:var(--ap-primary);"><i class="bi bi-pencil-square"></i></span>
+      <div class="stat-value">32</div>
+      <p class="text-muted small mb-1">Tests attempted</p>
+      <span class="small trend-up"><i class="bi bi-arrow-up-short"></i>4 this week</span>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(22,163,74,.12); color:var(--ap-success);"><i class="bi bi-graph-up-arrow"></i></span>
+      <div class="stat-value">74%</div>
+      <p class="text-muted small mb-1">Average score</p>
+      <span class="small trend-up"><i class="bi bi-arrow-up-short"></i>+6% vs last month</span>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(245,158,11,.15); color:var(--ap-accent);"><i class="bi bi-trophy"></i></span>
+      <div class="stat-value">#42</div>
+      <p class="text-muted small mb-1">Leaderboard rank</p>
+      <span class="small trend-up"><i class="bi bi-arrow-up-short"></i>Up 8 places</span>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(8,145,178,.13); color:var(--ap-info);"><i class="bi bi-fire"></i></span>
+      <div class="stat-value">12 days</div>
+      <p class="text-muted small mb-1">Study streak</p>
+      <span class="small text-muted">Keep it going!</span>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <!-- SCORE TREND -->
+  <div class="col-lg-8">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Score trend</h5>
+        <a href="performance.html" class="small">View full report <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div style="height:260px;"><canvas id="chartScoreTrend"></canvas></div>
+    </div>
+  </div>
+  <!-- TODAY'S SCHEDULE -->
+  <div class="col-lg-4">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Today's schedule</h5>
+        <a href="schedule.html" class="small">View all <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="d-flex flex-column gap-3">
+        {% for item in schedule_items[:3] %}
+        <div class="schedule-item">
+          <p class="small text-muted mb-1">{{ item.time }}</p>
+          <h6 class="mb-1 small">{{ item.title }}</h6>
+          <p class="text-muted mb-0" style="font-size:.78rem;"><i class="bi bi-person me-1"></i>{{ item.faculty }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <!-- RECENT TESTS -->
+  <div class="col-lg-7">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Recent test attempts</h5>
+        <a href="tests.html" class="small">Test library <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-ap mb-0">
+          <thead><tr><th>Test</th><th>Score</th><th>Percentile</th><th></th></tr></thead>
+          <tbody>
+            {% for t in mock_tests[:5] %}
+            {% if t.best_score %}
+            <tr>
+              <td>
+                <p class="mb-0 fw-semibold small">{{ t.name }}</p>
+                <p class="text-muted mb-0" style="font-size:.75rem;">{{ t.type }} · {{ t.category }}</p>
+              </td>
+              <td><span class="fw-bold">{{ t.best_score }}%</span></td>
+              <td><span class="status-pill {{ 'success' if t.best_score >= 75 else ('warning' if t.best_score >= 55 else 'danger') }}">{{ t.report.percentile }}th %ile</span></td>
+              <td class="text-end"><a href="{{ 'score-report.html' if loop.index0 == 0 else 'score-report-' + t.slug + '.html' }}" class="btn btn-sm btn-outline-secondary border-ap">Report</a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- WEAK AREAS -->
+  <div class="col-lg-5">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Weak areas to focus on</h5>
+        <a href="performance.html" class="small">Details <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="d-flex flex-column gap-3">
+        {% for topic, score, color in [("General Awareness", 58, "danger"), ("Reasoning — Puzzles", 61, "warning"), ("Computer Aptitude", 68, "warning")] %}
+        <div>
+          <div class="d-flex justify-content-between small mb-1">
+            <span class="fw-semibold">{{ topic }}</span><span class="text-muted">{{ score }}%</span>
+          </div>
+          <div class="progress-ap">
+            <div class="progress-bar bg-{{ color }}" style="width:{{ score }}%;"></div>
+          </div>
+        </div>
+        {% endfor %}
+        <a href="materials.html" class="btn btn-outline-secondary border-ap btn-sm mt-2"><i class="bi bi-folder2-open me-2"></i>Get topic notes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

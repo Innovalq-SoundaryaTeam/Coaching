@@ -1,0 +1,140 @@
+{% extends "base_auth.html" %}
+{% block content %}
+
+<ul class="nav nav-pills mb-4 bg-surface-2 p-1 rounded-pill" id="authTabs" role="tablist">
+  <li class="nav-item flex-fill" role="presentation">
+    <button class="nav-link w-100 rounded-pill active" data-bs-toggle="tab" data-bs-target="#tab-login" type="button">Login</button>
+  </li>
+  <li class="nav-item flex-fill" role="presentation">
+    <button class="nav-link w-100 rounded-pill" data-bs-toggle="tab" data-bs-target="#tab-register" type="button">Register</button>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <!-- LOGIN -->
+  <div class="tab-pane fade show active" id="tab-login">
+    <h3 class="mb-1">Welcome back</h3>
+    <p class="text-muted mb-4">Log in to access your dashboard, mock tests and study material.</p>
+
+    <div class="row g-2 mb-4">
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would continue with Google.">
+          <i class="bi bi-google"></i>Google
+        </button>
+      </div>
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would continue with Apple.">
+          <i class="bi bi-apple"></i>Apple
+        </button>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <hr class="flex-grow-1 border-ap"><span class="text-muted small">or continue with email</span><hr class="flex-grow-1 border-ap">
+    </div>
+
+    <form class="needs-validation" novalidate data-demo-submit="Demo template — this would sign you into your dashboard.">
+      <div class="mb-3">
+        <label class="form-label">Email or student ID</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="text" class="form-control" placeholder="you@example.com" required>
+          <div class="invalid-feedback">Please enter your email or student ID.</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Enter password" required minlength="6">
+          <button class="btn btn-outline-secondary border-ap" type="button" data-toggle-password="#loginPassword"><i class="bi bi-eye"></i></button>
+          <div class="invalid-feedback">Password must be at least 6 characters.</div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rememberMe">
+          <label class="form-check-label small" for="rememberMe">Remember me</label>
+        </div>
+        <a href="#" class="small">Forgot password?</a>
+      </div>
+      <button class="btn btn-gradient w-100 mb-3" type="submit">Log In</button>
+      <div class="row g-2 text-center">
+        <div class="col-6"><a href="student/dashboard.html" class="btn btn-outline-secondary border-ap w-100 btn-sm">Student Demo</a></div>
+        <div class="col-6"><a href="admin/dashboard.html" class="btn btn-outline-secondary border-ap w-100 btn-sm">Admin Demo</a></div>
+      </div>
+    </form>
+  </div>
+
+  <!-- REGISTER -->
+  <div class="tab-pane fade" id="tab-register">
+    <h3 class="mb-1">Create your account</h3>
+    <p class="text-muted mb-4">Get 3 free mock tests the moment you sign up.</p>
+
+    <div class="row g-2 mb-4">
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would sign up with Google.">
+          <i class="bi bi-google"></i>Google
+        </button>
+      </div>
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would sign up with Apple.">
+          <i class="bi bi-apple"></i>Apple
+        </button>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <hr class="flex-grow-1 border-ap"><span class="text-muted small">or sign up with email</span><hr class="flex-grow-1 border-ap">
+    </div>
+
+    <form class="needs-validation" novalidate data-demo-submit="Demo template — this would create your account.">
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label class="form-label">Full name</label>
+          <input type="text" class="form-control" placeholder="Your name" required>
+          <div class="invalid-feedback">Please enter your name.</div>
+        </div>
+        <div class="col-sm-6">
+          <label class="form-label">Phone number</label>
+          <input type="tel" class="form-control" placeholder="+91 98765 43210" required pattern="[0-9+ ]{7,15}">
+          <div class="invalid-feedback">Please enter a valid phone number.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-control" placeholder="you@example.com" required>
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Target exam category</label>
+          <select class="form-select" required>
+            <option value="" selected disabled>Choose an exam category</option>
+            {% for c in exam_categories %}
+            <option>{{ c.name }}</option>
+            {% endfor %}
+          </select>
+          <div class="invalid-feedback">Please select a category.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input type="password" class="form-control" id="registerPassword" placeholder="Create a password" required minlength="6">
+            <button class="btn btn-outline-secondary border-ap" type="button" data-toggle-password="#registerPassword"><i class="bi bi-eye"></i></button>
+            <div class="invalid-feedback">Password must be at least 6 characters.</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+            <label class="form-check-label small" for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+            <div class="invalid-feedback">You must agree before continuing.</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-gradient w-100" type="submit">Create Account</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

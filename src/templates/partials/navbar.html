@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-ap {{ 'navbar-transparent' if variant == 'transparent' else '' }}">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+      {{ site.name }}
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNavOffcanvas" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse d-none d-lg-flex">
+      <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {{ 'active' if active in ['home1','home2'] else '' }}" href="#" data-bs-toggle="dropdown">Home</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item {{ 'active' if active=='home1' else '' }}" href="index.html"><i class="bi bi-house-door me-2"></i>Home &mdash; General</a></li>
+            <li><a class="dropdown-item {{ 'active' if active=='home2' else '' }}" href="home-2.html"><i class="bi bi-lightning-charge me-2"></i>Home &mdash; Online Prep</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link {{ 'active' if active=='about' else '' }}" href="about.html">About</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {{ 'active' if active in ['courses','course-details'] else '' }}" href="#" data-bs-toggle="dropdown">Courses</a>
+          <ul class="dropdown-menu p-3" style="min-width:19rem;">
+            <li><a class="dropdown-item" href="courses.html#banking"><i class="bi bi-bank me-2"></i>Banking Exams</a></li>
+            <li><a class="dropdown-item" href="courses.html#ssc"><i class="bi bi-file-earmark-text me-2"></i>SSC Exams</a></li>
+            <li><a class="dropdown-item" href="courses.html#civil-services"><i class="bi bi-bank2 me-2"></i>Civil Services (UPSC)</a></li>
+            <li><a class="dropdown-item" href="courses.html#engineering"><i class="bi bi-gear me-2"></i>Engineering Entrance (JEE)</a></li>
+            <li><a class="dropdown-item" href="courses.html#medical"><i class="bi bi-heart-pulse me-2"></i>Medical Entrance (NEET)</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item fw-bold text-primary-emphasis" href="course-details.html">View sample course details <i class="bi bi-arrow-right ms-1"></i></a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link {{ 'active' if active=='faculty' else '' }}" href="faculty.html">Faculty</a></li>
+        <li class="nav-item"><a class="nav-link {{ 'active' if active=='results' else '' }}" href="results.html">Results</a></li>
+        <li class="nav-item"><a class="nav-link {{ 'active' if active=='fees' else '' }}" href="fees.html">Fees &amp; Pricing</a></li>
+        <li class="nav-item"><a class="nav-link {{ 'active' if active=='blog' else '' }}" href="blog.html">Blog</a></li>
+        <li class="nav-item"><a class="nav-link {{ 'active' if active=='contact' else '' }}" href="contact.html">Contact</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">More</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><h6 class="dropdown-header">Dashboards (demo)</h6></li>
+            <li><a class="dropdown-item" href="student/dashboard.html"><i class="bi bi-mortarboard me-2"></i>Student Dashboard</a></li>
+            <li><a class="dropdown-item" href="admin/dashboard.html"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><h6 class="dropdown-header">Utility pages</h6></li>
+            <li><a class="dropdown-item {{ 'active' if active=='login' else '' }}" href="login.html"><i class="bi bi-box-arrow-in-right me-2"></i>Login / Register</a></li>
+            <li><a class="dropdown-item {{ 'active' if active=='coming-soon' else '' }}" href="coming-soon.html"><i class="bi bi-hourglass-split me-2"></i>Coming Soon</a></li>
+            <li><a class="dropdown-item {{ 'active' if active=='404' else '' }}" href="404.html"><i class="bi bi-exclamation-triangle me-2"></i>404 Error</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="d-none d-lg-flex align-items-center gap-2">
+      <button class="theme-toggle-btn" data-theme-toggle type="button" title="Toggle dark / light mode">
+        <i class="bi bi-moon-stars" data-theme-icon></i>
+      </button>
+      <button class="rtl-toggle-btn" data-dir-toggle type="button" title="Toggle RTL / LTR">
+        <i class="bi bi-translate"></i>
+      </button>
+      <a href="login.html" class="btn btn-sm btn-outline-secondary border-ap">Student Login</a>
+      <a href="contact.html" class="btn btn-sm btn-gradient">Book Free Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile offcanvas nav -->
+<div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="mainNavOffcanvas">
+  <div class="offcanvas-header">
+    <a class="navbar-brand" href="index.html"><span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span> {{ site.name }}</a>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav nav-pills flex-column gap-1">
+      <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">Home 1 &mdash; General</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="home-2.html">Home 2 &mdash; Online Prep</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="about.html">About</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="courses.html">Courses</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="course-details.html">Course Details</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="faculty.html">Faculty</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="results.html">Results</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="fees.html">Fees &amp; Pricing</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="blog.html">Blog</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="contact.html">Contact</a></li>
+      <li><hr></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="student/dashboard.html"><i class="bi bi-mortarboard me-2"></i>Student Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="admin/dashboard.html"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="login.html"><i class="bi bi-box-arrow-in-right me-2"></i>Login / Register</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="coming-soon.html">Coming Soon</a></li>
+      <li class="nav-item"><a class="nav-link fw-semibold" href="404.html">404 Error</a></li>
+    </ul>
+    <div class="d-flex align-items-center gap-2 mt-4">
+      <button class="theme-toggle-btn" data-theme-toggle type="button"><i class="bi bi-moon-stars" data-theme-icon></i></button>
+      <button class="rtl-toggle-btn" data-dir-toggle type="button"><i class="bi bi-translate"></i></button>
+      <a href="contact.html" class="btn btn-gradient btn-sm flex-grow-1">Book Free Demo</a>
+    </div>
+  </div>
+</div>

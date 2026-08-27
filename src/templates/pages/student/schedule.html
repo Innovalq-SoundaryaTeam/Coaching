@@ -1,0 +1,103 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <h1 class="h3 mb-1">Class &amp; Exam Schedule</h1>
+    <p class="text-muted mb-0">Your upcoming live classes, doubt sessions and mock exams.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <button class="chip active" data-schedule-filter="all">All</button>
+    <button class="chip" data-schedule-filter="class">Classes</button>
+    <button class="chip" data-schedule-filter="exam">Exams</button>
+    <button class="chip" data-schedule-filter="doubt">Doubt Sessions</button>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-8">
+    <div class="panel">
+      {% set grouped = {} %}
+      {% for item in schedule_items %}
+        {% if grouped.update({item.day: (grouped.get(item.day, []) + [item])}) %}{% endif %}
+      {% endfor %}
+      {% for day, items in grouped.items() %}
+      <div class="mb-4">
+        <h6 class="text-muted small text-uppercase mb-3" style="letter-spacing:.05em;">{{ day }}</h6>
+        <div class="d-flex flex-column gap-3" data-schedule-list>
+          {% for item in items %}
+          <div class="schedule-item d-flex justify-content-between align-items-center flex-wrap gap-2" data-schedule-type="{{ item.type }}">
+            <div>
+              <span class="chip mb-1 d-inline-block">
+                {% if item.type == 'class' %}<i class="bi bi-camera-video me-1"></i>Live Class
+                {% elif item.type == 'exam' %}<i class="bi bi-pencil-square me-1"></i>Mock Exam
+                {% else %}<i class="bi bi-chat-dots me-1"></i>Doubt Session{% endif %}
+              </span>
+              <h6 class="mb-1">{{ item.title }}</h6>
+              <p class="text-muted small mb-0"><i class="bi bi-clock me-1"></i>{{ item.time }} &nbsp;·&nbsp; <i class="bi bi-person me-1"></i>{{ item.faculty }}</p>
+            </div>
+            <button class="btn btn-sm {{ 'btn-gradient' if item.type == 'exam' else 'btn-outline-secondary border-ap' }}">
+              {{ 'Start Exam' if item.type == 'exam' else 'Join / Set Reminder' }}
+            </button>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="panel mb-3">
+      <h6 class="mb-3">This week at a glance</h6>
+      <div class="row g-2 text-center">
+        {% for d in ["M","T","W","T","F","S","S"] %}
+        <div class="col">
+          <div class="small text-muted mb-1">{{ d }}</div>
+          <div class="rounded-circle mx-auto d-flex align-items-center justify-content-center {{ 'bg-primary text-white' if loop.index == 5 else 'bg-surface-2' }}" style="width:2.2rem;height:2.2rem;font-size:.8rem;">{{ 16 + loop.index }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="panel mb-3">
+      <h6 class="mb-3">Reminders</h6>
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" checked>
+        <label class="form-check-label small">Email me 1 hour before class</label>
+      </div>
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" checked>
+        <label class="form-check-label small">SMS reminder for mock exams</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label small">WhatsApp daily digest</label>
+      </div>
+    </div>
+    <div class="panel text-center" style="background:var(--ap-gradient);">
+      <h6 class="text-white mb-2">Missed a class?</h6>
+      <p class="text-white-50 small mb-3">All sessions are recorded and available within 2 hours.</p>
+      <a href="materials.html" class="btn btn-white-soft w-100 btn-sm">View Recordings</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<script>
+  (function(){
+    var items = document.querySelectorAll('[data-schedule-type]');
+    var btns = document.querySelectorAll('[data-schedule-filter]');
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        btns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var f = btn.getAttribute('data-schedule-filter');
+        items.forEach(function(item){
+          item.style.display = (f === 'all' || item.getAttribute('data-schedule-type') === f) ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
+{% endblock %}

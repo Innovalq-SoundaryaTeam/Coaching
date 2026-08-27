@@ -1,0 +1,190 @@
+{% extends "base_public.html" %}
+{% block content %}
+
+<!-- HERO 2 : SaaS/product-style dark hero -->
+<section class="hero-2">
+  <div class="grid-overlay"></div>
+  <div class="container hero-content">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 reveal">
+        <span class="badge rounded-pill text-bg-light bg-opacity-10 border border-white-50 px-3 py-2 mb-4 d-inline-flex align-items-center gap-2" style="background:rgba(255,255,255,.08);">
+          <i class="bi bi-broadcast text-warning"></i><span class="text-white small fw-semibold">Live batches starting every Monday</span>
+        </span>
+        <h1 class="display-4 fw-bold text-white mb-3">The all-in-one prep platform for competitive exams.</h1>
+        <p class="lead text-white-50 mb-4">One dashboard for live classes, an adaptive test engine, topic analytics and study material — built to take you from enrollment to selection.</p>
+        <div class="d-flex flex-wrap gap-3 mb-5">
+          <a href="login.html" class="btn btn-accent btn-lg"><i class="bi bi-rocket-takeoff me-2"></i>Start Free Trial</a>
+          <a href="#platform" class="btn btn-white-soft btn-lg"><i class="bi bi-play-circle me-2"></i>See how it works</a>
+        </div>
+        <div class="d-flex flex-wrap gap-4">
+          <div class="d-flex align-items-center gap-2 text-white-50 small"><i class="bi bi-check-circle-fill text-success"></i>No credit card required</div>
+          <div class="d-flex align-items-center gap-2 text-white-50 small"><i class="bi bi-check-circle-fill text-success"></i>Cancel anytime</div>
+          <div class="d-flex align-items-center gap-2 text-white-50 small"><i class="bi bi-check-circle-fill text-success"></i>3 free mock tests</div>
+        </div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="glass-card p-3 p-md-4">
+          <img src="{{ rel }}assets/images/dashboard-preview-app.jpg" class="img-fluid rounded-3 w-100" alt="LS Academy student dashboard preview">
+          <div class="row g-3 mt-1">
+            <div class="col-4">
+              <div class="glass-card p-3 text-center">
+                <div class="h4 text-white mb-0">96%</div>
+                <div class="text-white-50 small">Pass rate</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="glass-card p-3 text-center">
+                <div class="h4 text-white mb-0">500+</div>
+                <div class="text-white-50 small">Mock tests</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="glass-card p-3 text-center">
+                <div class="h4 text-white mb-0">24/7</div>
+                <div class="text-white-50 small">Doubt support</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO / TRUST STRIP -->
+<section class="stat-strip py-4">
+  <div class="container">
+    <p class="text-center text-muted small text-uppercase fw-bold mb-4" style="letter-spacing:.08em;">Trusted by aspirants preparing for</p>
+    <div class="row g-3 text-center">
+      {% for c in exam_categories %}
+      <div class="col-6 col-md-4 col-lg">
+        <div class="d-flex flex-column align-items-center gap-2 py-2">
+          <span class="icon-tile"><i class="bi {{ c.icon }}"></i></span>
+          <span class="small fw-semibold">{{ c.name }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM FEATURES -->
+<section class="section" id="platform">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-7 reveal">
+        <span class="eyebrow mb-3"><i class="bi bi-grid-1x2"></i>The Platform</span>
+        <h2 class="display-6 mb-3">Everything your prep needs, minus the chaos of ten different apps</h2>
+      </div>
+    </div>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-4 reveal">
+        <div class="card-ap h-100 p-4">
+          <span class="icon-tile icon-tile-lg mb-3"><i class="bi bi-camera-video"></i></span>
+          <h5>Live Class Studio</h5>
+          <p class="text-muted mb-0">HD live sessions with real-time polls, whiteboard annotation and instant doubt-raising — plus automatic recordings.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 reveal" style="transition-delay:60ms;">
+        <div class="card-ap h-100 p-4">
+          <span class="icon-tile icon-tile-lg mb-3"><i class="bi bi-cpu"></i></span>
+          <h5>Adaptive Test Engine</h5>
+          <p class="text-muted mb-0">Tests that adjust difficulty based on your accuracy, so every attempt targets your actual skill gaps.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 reveal" style="transition-delay:120ms;">
+        <div class="card-ap h-100 p-4">
+          <span class="icon-tile icon-tile-lg mb-3"><i class="bi bi-bar-chart-line"></i></span>
+          <h5>Performance Intelligence</h5>
+          <p class="text-muted mb-0">Topic-wise heatmaps, percentile tracking and predicted-rank models updated after every test.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT FEATURE -->
+<section class="section bg-surface-2">
+  <div class="container">
+    <div class="row align-items-center g-5 mb-5">
+      <div class="col-lg-6 order-lg-2 reveal">
+        <span class="eyebrow mb-3"><i class="bi bi-clipboard-data"></i>Test Engine</span>
+        <h2 class="mb-3">Mock tests that actually predict your rank</h2>
+        <p class="text-muted mb-4">Every test is calibrated against real exam-day difficulty and scored against a live all-India percentile — not a guess.</p>
+        <ul class="list-unstyled d-flex flex-column gap-3">
+          <li class="d-flex gap-3"><i class="bi bi-check-circle-fill text-success mt-1"></i><span>Subject-wise, sectional and full-length formats</span></li>
+          <li class="d-flex gap-3"><i class="bi bi-check-circle-fill text-success mt-1"></i><span>Instant correct / incorrect / unattempted breakdown</span></li>
+          <li class="d-flex gap-3"><i class="bi bi-check-circle-fill text-success mt-1"></i><span>Negative marking and timing rules matched to the real exam</span></li>
+        </ul>
+        <a href="student/tests.html" class="btn btn-gradient mt-4">Preview Test Library <i class="bi bi-arrow-right ms-1"></i></a>
+      </div>
+      <div class="col-lg-6 order-lg-1 reveal">
+        <div class="rounded-ap overflow-hidden shadow-ap"><img src="{{ rel }}assets/images/mock-test-engine-ui.jpg" class="img-fluid w-100" alt="Mock test interface"></div>
+      </div>
+    </div>
+
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 reveal">
+        <span class="eyebrow mb-3"><i class="bi bi-graph-up-arrow"></i>Analytics</span>
+        <h2 class="mb-3">Know your weak topics before your exam does</h2>
+        <p class="text-muted mb-4">The performance tracker plots your accuracy by topic over time, so revision time goes exactly where it's needed.</p>
+        <ul class="list-unstyled d-flex flex-column gap-3">
+          <li class="d-flex gap-3"><i class="bi bi-check-circle-fill text-success mt-1"></i><span>Topic-wise accuracy trends across every attempt</span></li>
+          <li class="d-flex gap-3"><i class="bi bi-check-circle-fill text-success mt-1"></i><span>Peer and topper benchmark comparisons</span></li>
+          <li class="d-flex gap-3"><i class="bi bi-check-circle-fill text-success mt-1"></i><span>Auto-generated revision suggestions each week</span></li>
+        </ul>
+        <a href="student/performance.html" class="btn btn-gradient mt-4">See Performance Tracker <i class="bi bi-arrow-right ms-1"></i></a>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="rounded-ap overflow-hidden shadow-ap"><img src="{{ rel }}assets/images/analytics-dashboard-ui.jpg" class="img-fluid w-100" alt="Performance analytics interface"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING PREVIEW -->
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-7 reveal">
+        <span class="eyebrow mb-3"><i class="bi bi-tags"></i>Pricing</span>
+        <h2 class="mb-0">Simple plans, no hidden fees</h2>
+      </div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      {% for plan in pricing_plans %}
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay: {{ loop.index0 * 60 }}ms;">
+        <div class="pricing-card {{ 'is-popular' if plan.popular else '' }} h-100">
+          {% if plan.popular %}<span class="popular-flag">Most Popular</span>{% endif %}
+          <h5 class="mb-1">{{ plan.name }}</h5>
+          <p class="text-muted small mb-3">{{ plan.tagline }}</p>
+          <div class="price mb-1">₹{{ '{:,}'.format(plan.monthly) }}<span class="fs-6 text-muted fw-normal">/mo</span></div>
+          <p class="text-muted small mb-4">or ₹{{ '{:,}'.format(plan.yearly) }} billed yearly</p>
+          <a href="fees.html" class="btn {{ 'btn-gradient' if plan.popular else 'btn-outline-secondary border-ap' }} w-100 mb-4">Choose {{ plan.name }}</a>
+          <ul>
+            {% for feat, included in plan.features %}
+            <li class="{{ '' if included else 'disabled' }}"><i class="bi {{ 'bi-check-circle-fill' if included else 'bi-dash-circle' }}"></i>{{ feat }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="rounded-ap p-5 text-center position-relative overflow-hidden reveal" style="background:#0b0c22;">
+      <div class="grid-overlay" style="position:absolute;inset:0;"></div>
+      <div class="position-relative" style="z-index:1;">
+        <h2 class="text-white mb-3">Your dashboard is one click away.</h2>
+        <p class="text-white-50 mb-4 fs-5 mx-auto" style="max-width:34rem;">Create a free account and get instant access to 3 mock tests and a sample study plan.</p>
+        <a href="login.html" class="btn btn-accent btn-lg"><i class="bi bi-rocket-takeoff me-2"></i>Create Free Account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

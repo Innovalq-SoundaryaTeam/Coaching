@@ -1,0 +1,73 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="mb-4">
+  <h1 class="h3 mb-1">Messages</h1>
+  <p class="text-muted mb-0">Enquiries and support requests from students and prospects.</p>
+</div>
+
+<div class="panel p-0 overflow-hidden">
+  <div class="row g-0">
+    <!-- MESSAGE LIST -->
+    <div class="col-lg-4 border-ap" style="border-right:1px solid var(--ap-border); max-height:38rem; overflow-y:auto;">
+      <div class="p-3 border-bottom border-ap">
+        <div class="input-group input-group-sm">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="search" class="form-control" placeholder="Search messages…">
+        </div>
+      </div>
+      {% for m in admin_messages %}
+      <a href="#" class="d-flex gap-3 p-3 text-reset border-bottom border-ap {{ 'bg-surface-2' if loop.first else '' }}" data-msg-item data-bs-toggle="tab" data-bs-target="#msg-{{ loop.index }}">
+        <img src="{{ rel }}{{ m.avatar }}" class="avatar-sm flex-shrink-0" alt="{{ m.name }}">
+        <div class="flex-grow-1 min-w-0">
+          <div class="d-flex justify-content-between align-items-start">
+            <h6 class="mb-0 small {{ 'fw-bold' if m.unread else '' }}">{{ m.name }}</h6>
+            <span class="text-muted flex-shrink-0" style="font-size:.7rem;">{{ m.time }}</span>
+          </div>
+          <p class="mb-0 small text-truncate {{ 'fw-semibold' if m.unread else 'text-muted' }}">{{ m.subject }}</p>
+          <p class="mb-0 text-muted text-truncate" style="font-size:.75rem;">{{ m.preview }}</p>
+        </div>
+        {% if m.unread %}<span class="badge bg-primary rounded-pill align-self-start flex-shrink-0" style="width:.5rem;height:.5rem;padding:0;"></span>{% endif %}
+      </a>
+      {% endfor %}
+    </div>
+
+    <!-- MESSAGE DETAIL -->
+    <div class="col-lg-8">
+      <div class="tab-content h-100">
+        {% for m in admin_messages %}
+        <div class="tab-pane fade {{ 'show active' if loop.first else '' }} h-100 d-flex flex-column" id="msg-{{ loop.index }}">
+          <div class="p-4 border-bottom border-ap d-flex justify-content-between align-items-start">
+            <div class="d-flex gap-3">
+              <img src="{{ rel }}{{ m.avatar }}" class="avatar-sm" alt="{{ m.name }}">
+              <div>
+                <h6 class="mb-0">{{ m.name }}</h6>
+                <p class="text-muted small mb-0">{{ m.email }}</p>
+              </div>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-archive"></i></button>
+              <button class="btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+          <div class="p-4 flex-grow-1">
+            <h5 class="mb-3">{{ m.subject }}</h5>
+            <p class="text-muted">{{ m.preview }} I'd really appreciate a quick response as I'm trying to plan my schedule for the next few weeks. Thank you for your time and for building such a helpful platform for aspirants like me.</p>
+            <p class="text-muted">Looking forward to hearing from you soon.</p>
+            <p class="text-muted mb-0">Best regards,<br>{{ m.name }}</p>
+          </div>
+          <div class="p-4 border-top border-ap">
+            <textarea class="form-control mb-3" rows="3" placeholder="Type your reply…"></textarea>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-outline-secondary border-ap btn-sm"><i class="bi bi-paperclip me-1"></i>Attach</button>
+              <button class="btn btn-gradient btn-sm"><i class="bi bi-send me-1"></i>Send Reply</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

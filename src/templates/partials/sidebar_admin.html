@@ -1,0 +1,26 @@
+<aside class="dash-sidebar">
+  <a href="{{ rel }}index.html" class="brand text-decoration-none">
+    <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>{{ site.name }}
+  </a>
+
+  <div class="dash-nav">
+    <p class="dash-nav-label">Overview</p>
+    <a href="dashboard.html" class="nav-link {{ 'active' if active=='dashboard' else '' }}"><i class="bi bi-grid-1x2"></i>Analytics</a>
+
+    <p class="dash-nav-label">Management</p>
+    <a href="students.html" class="nav-link {{ 'active' if active=='students' else '' }}"><i class="bi bi-people"></i>Users &amp; Students</a>
+    <a href="courses.html" class="nav-link {{ 'active' if active=='courses' else '' }}"><i class="bi bi-journal-bookmark"></i>Courses &amp; Tests</a>
+    <a href="orders.html" class="nav-link {{ 'active' if active=='orders' else '' }}"><i class="bi bi-receipt"></i>Orders &amp; Payments
+      <span class="badge badge-mini text-bg-danger rounded-pill">6</span>
+    </a>
+    <a href="messages.html" class="nav-link {{ 'active' if active=='messages' else '' }}"><i class="bi bi-chat-dots"></i>Messages
+      <span class="badge badge-mini text-bg-primary rounded-pill">12</span>
+    </a>
+
+    <p class="dash-nav-label">Account</p>
+    <a href="#" class="nav-link"><i class="bi bi-gear"></i>Settings</a>
+    <a href="{{ rel }}index.html" class="nav-link"><i class="bi bi-globe"></i>View website</a>
+    <a href="{{ rel }}login.html" class="nav-link text-danger"><i class="bi bi-box-arrow-right"></i>Sign out</a>
+  </div>
+</aside>
+<div class="dash-backdrop"></div>

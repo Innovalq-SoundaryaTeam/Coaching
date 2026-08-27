@@ -1,0 +1,121 @@
+{% extends "base_public.html" %}
+{% block content %}
+
+<section class="section-sm bg-surface-2 border-bottom border-ap">
+  <div class="container text-center">
+    <span class="eyebrow mb-3"><i class="bi bi-tags"></i>Fees &amp; Pricing</span>
+    <h1 class="display-6 mb-2">Transparent pricing, no hidden costs</h1>
+    <p class="text-muted mx-auto mb-3" style="max-width:38rem;">Choose a plan that matches your prep style — every plan can be applied to any of our 5 exam categories.</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item active">Fees &amp; Pricing</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="pricing-toggle" data-pricing-toggle>
+        <button class="btn btn-gradient" data-period="monthly">Monthly</button>
+        <button class="btn btn-light" data-period="yearly">Yearly <span class="badge text-bg-success ms-1">Save 20%</span></button>
+      </div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      {% for plan in pricing_plans %}
+      <div class="col-md-6 col-lg-4 reveal" style="transition-delay: {{ loop.index0 * 60 }}ms;">
+        <div class="pricing-card {{ 'is-popular' if plan.popular else '' }} h-100">
+          {% if plan.popular %}<span class="popular-flag">Most Popular</span>{% endif %}
+          <h5 class="mb-1">{{ plan.name }}</h5>
+          <p class="text-muted small mb-3">{{ plan.tagline }}</p>
+          <div class="price mb-1" data-price-monthly>₹{{ '{:,}'.format(plan.monthly) }}<span class="fs-6 text-muted fw-normal">/mo</span></div>
+          <div class="price mb-1" data-price-yearly style="display:none;">₹{{ '{:,}'.format(plan.yearly) }}<span class="fs-6 text-muted fw-normal">/yr</span></div>
+          <p class="text-muted small mb-4">Applies to any single exam category</p>
+          <a href="contact.html" class="btn {{ 'btn-gradient' if plan.popular else 'btn-outline-secondary border-ap' }} w-100 mb-4">Get Started</a>
+          <ul>
+            {% for feat, included in plan.features %}
+            <li class="{{ '' if included else 'disabled' }}"><i class="bi {{ 'bi-check-circle-fill' if included else 'bi-dash-circle' }}"></i>{{ feat }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- FEES BY EXAM CATEGORY TABLE -->
+<section class="section bg-surface-2">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-5">
+      <div class="col-lg-7 reveal">
+        <span class="eyebrow mb-3"><i class="bi bi-receipt"></i>Fee Structure</span>
+        <h2 class="mb-0">Fees by exam category</h2>
+      </div>
+    </div>
+    <div class="panel reveal">
+      <div class="table-responsive">
+        <table class="table table-ap align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Programme</th>
+              <th>Duration</th>
+              <th>Current Fee</th>
+              <th>Original Fee</th>
+              <th>You Save</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in exam_categories %}
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="icon-tile" style="width:2.4rem;height:2.4rem;font-size:1rem;"><i class="bi {{ c.icon }}"></i></span>
+                  <span class="fw-semibold">{{ c.name }}</span>
+                </div>
+              </td>
+              <td>{{ c.duration }}</td>
+              <td class="fw-bold">₹{{ '{:,}'.format(c.fee) }}</td>
+              <td class="text-muted text-decoration-line-through">₹{{ '{:,}'.format(c.fee_old) }}</td>
+              <td><span class="status-pill success">{{ ((c.fee_old - c.fee) / c.fee_old * 100) | round | int }}% off</span></td>
+              <td class="text-end"><a href="{{ 'course-details.html' if c.slug == 'banking' else 'course-details-' + c.slug + '.html' }}" class="btn btn-sm btn-outline-secondary border-ap">Details</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="text-muted small mt-3 text-center">All fees are inclusive of GST. EMI options available starting at ₹999/month via our partner NBFCs.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="text-center mb-5 reveal">
+          <span class="eyebrow mb-3"><i class="bi bi-question-circle"></i>FAQs</span>
+          <h2 class="mb-0">Fees &amp; enrollment questions</h2>
+        </div>
+        <div class="accordion accordion-ap reveal" id="faqAccordionFees">
+          {% for f in faqs_general %}
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button {{ '' if loop.first else 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#ffaq{{ loop.index }}">{{ f.q }}</button>
+            </h2>
+            <div id="ffaq{{ loop.index }}" class="accordion-collapse collapse {{ 'show' if loop.first else '' }}" data-bs-parent="#faqAccordionFees">
+              <div class="accordion-body">{{ f.a }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

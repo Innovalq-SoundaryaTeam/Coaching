@@ -1,0 +1,79 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <h1 class="h3 mb-1">Courses &amp; Tests</h1>
+    <p class="text-muted mb-0">Manage exam categories, course pricing and the mock-test library.</p>
+  </div>
+  <button class="btn btn-gradient"><i class="bi bi-plus-lg me-2"></i>Add Course</button>
+</div>
+
+<div class="panel mb-4">
+  <div class="table-responsive">
+    <table class="table table-ap align-middle mb-0">
+      <thead><tr><th>Course</th><th>Duration</th><th>Enrolled</th><th>Fee</th><th>Rating</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        {% for c in exam_categories %}
+        <tr>
+          <td>
+            <div class="d-flex align-items-center gap-2">
+              <span class="icon-tile" style="width:2.4rem;height:2.4rem;font-size:1rem;"><i class="bi {{ c.icon }}"></i></span>
+              <div>
+                <p class="mb-0 fw-semibold small">{{ c.name }}</p>
+                <p class="mb-0 text-muted" style="font-size:.75rem;">{{ c.exams | join(', ') }}</p>
+              </div>
+            </div>
+          </td>
+          <td>{{ c.duration }}</td>
+          <td>{{ '{:,}'.format(c.students) }}</td>
+          <td>₹{{ '{:,}'.format(c.fee) }}</td>
+          <td><i class="bi bi-star-fill text-warning"></i> {{ c.rating }}</td>
+          <td><span class="status-pill success">Published</span></td>
+          <td class="text-end">
+            <button class="btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-pencil"></i></button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="panel-title">Mock test library</h5>
+    <button class="btn btn-sm btn-gradient"><i class="bi bi-plus-lg me-1"></i>Add Test</button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-ap align-middle mb-0">
+      <thead><tr><th>Test name</th><th>Category</th><th>Type</th><th>Questions</th><th>Attempts (all students)</th><th>Avg. score</th><th></th></tr></thead>
+      <tbody>
+        {% for t in mock_tests %}
+        <tr>
+          <td class="fw-semibold small">{{ t.name }}</td>
+          <td><span class="chip">{{ t.category }}</span></td>
+          <td class="small text-muted">{{ t.type }}</td>
+          <td>{{ t.questions }}</td>
+          <td>{{ (t.attempts * 214) | int }}</td>
+          <td>{{ t.best_score if t.best_score else '—' }}{{ '%' if t.best_score else '' }}</td>
+          <td class="text-end">
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-secondary border-ap" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#"><i class="bi bi-eye me-2"></i>Preview</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-pencil me-2"></i>Edit questions</a></li>
+                <li><a class="dropdown-item" href="#"><i class="bi bi-graph-up me-2"></i>View analytics</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete</a></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

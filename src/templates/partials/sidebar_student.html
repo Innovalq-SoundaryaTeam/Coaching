@@ -1,0 +1,24 @@
+<aside class="dash-sidebar">
+  <a href="{{ rel }}index.html" class="brand text-decoration-none">
+    <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>{{ site.name }}
+  </a>
+
+  <div class="dash-nav">
+    <p class="dash-nav-label">Learning</p>
+    <a href="dashboard.html" class="nav-link {{ 'active' if active=='dashboard' else '' }}"><i class="bi bi-grid-1x2"></i>Dashboard</a>
+    <a href="tests.html" class="nav-link {{ 'active' if active=='tests' else '' }}"><i class="bi bi-pencil-square"></i>Test Library</a>
+    <a href="score-report.html" class="nav-link {{ 'active' if active=='score-report' else '' }}"><i class="bi bi-clipboard-data"></i>Score Reports</a>
+    <a href="performance.html" class="nav-link {{ 'active' if active=='performance' else '' }}"><i class="bi bi-graph-up-arrow"></i>Performance Tracker</a>
+
+    <p class="dash-nav-label">Resources</p>
+    <a href="materials.html" class="nav-link {{ 'active' if active=='materials' else '' }}"><i class="bi bi-folder2-open"></i>Study Material</a>
+    <a href="schedule.html" class="nav-link {{ 'active' if active=='schedule' else '' }}"><i class="bi bi-calendar-week"></i>Class &amp; Exam Schedule</a>
+
+    <p class="dash-nav-label">Account</p>
+    <a href="profile.html" class="nav-link {{ 'active' if active=='profile' else '' }}"><i class="bi bi-person-circle"></i>My Profile</a>
+    <a href="{{ rel }}fees.html" class="nav-link"><i class="bi bi-credit-card"></i>Billing &amp; Fees</a>
+    <a href="{{ rel }}index.html" class="nav-link"><i class="bi bi-globe"></i>View website</a>
+    <a href="{{ rel }}login.html" class="nav-link text-danger"><i class="bi bi-box-arrow-right"></i>Sign out</a>
+  </div>
+</aside>
+<div class="dash-backdrop"></div>

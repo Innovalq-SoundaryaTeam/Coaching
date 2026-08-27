@@ -1,0 +1,99 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <h1 class="h3 mb-1">Study Material</h1>
+    <p class="text-muted mb-0">Download notes, formula sheets and previous year papers.</p>
+  </div>
+</div>
+
+<div class="panel mb-4">
+  <div class="row g-3 align-items-center">
+    <div class="col-lg-4">
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input type="search" class="form-control" placeholder="Search materials…" data-material-search>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+        <button class="chip active" data-material-filter="all">All</button>
+        <button class="chip" data-material-filter="Banking">Banking</button>
+        <button class="chip" data-material-filter="SSC">SSC</button>
+        <button class="chip" data-material-filter="General">General</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3" data-material-grid>
+  {% for m in study_materials %}
+  <div class="col-md-6" data-material-category="{{ m.category }}" data-material-title="{{ m.title }}">
+    <div class="material-row">
+      <span class="file-icon"><i class="bi {{ 'bi-file-earmark-zip' if m.type == 'ZIP' else 'bi-file-earmark-pdf' }}"></i></span>
+      <div class="flex-grow-1">
+        <h6 class="mb-1 small">{{ m.title }}</h6>
+        <p class="text-muted mb-0" style="font-size:.75rem;">{{ m.type }} · {{ m.size }} · <span class="chip" style="padding:.1rem .5rem;">{{ m.category }}</span></p>
+      </div>
+      <button class="btn btn-sm btn-outline-secondary border-ap flex-shrink-0"><i class="bi bi-download"></i></button>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="panel mt-4">
+  <h5 class="panel-title mb-3">Previous year papers</h5>
+  <div class="table-responsive">
+    <table class="table table-ap mb-0">
+      <thead><tr><th>Exam</th><th>Year</th><th>Shift</th><th></th></tr></thead>
+      <tbody>
+        {% for exam, year, shift in [
+          ("SBI PO Prelims", "2025", "Shift 1 & 2"),
+          ("IBPS Clerk Mains", "2025", "Single Shift"),
+          ("SBI PO Prelims", "2024", "Shift 1, 2 & 3"),
+          ("IBPS PO Prelims", "2024", "Shift 1 & 2"),
+          ("RBI Grade B Phase 1", "2023", "Single Shift"),
+        ] %}
+        <tr>
+          <td class="fw-semibold">{{ exam }}</td>
+          <td>{{ year }}</td>
+          <td class="text-muted">{{ shift }}</td>
+          <td class="text-end"><button class="btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-download me-1"></i>Download</button></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<script>
+  (function(){
+    var cards = document.querySelectorAll('[data-material-category]');
+    var filterBtns = document.querySelectorAll('[data-material-filter]');
+    var search = document.querySelector('[data-material-search]');
+    var activeFilter = 'all';
+    function apply(){
+      var term = (search && search.value || '').toLowerCase();
+      cards.forEach(function(card){
+        var cat = card.getAttribute('data-material-category');
+        var title = (card.getAttribute('data-material-title') || '').toLowerCase();
+        var matchesFilter = activeFilter === 'all' || cat === activeFilter;
+        var matchesSearch = term === '' || title.indexOf(term) !== -1;
+        card.style.display = (matchesFilter && matchesSearch) ? '' : 'none';
+      });
+    }
+    filterBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        filterBtns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeFilter = btn.getAttribute('data-material-filter');
+        apply();
+      });
+    });
+    if (search) search.addEventListener('input', apply);
+  })();
+</script>
+{% endblock %}

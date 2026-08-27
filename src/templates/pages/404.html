@@ -1,0 +1,27 @@
+{% extends "base_minimal.html" %}
+{% block content %}
+<section class="section d-flex align-items-center" style="min-height:75vh;">
+  <div class="container text-center">
+    <div class="error-num mb-3">404</div>
+    <h2 class="mb-3">Looks like this page took a wrong turn.</h2>
+    <p class="text-muted mx-auto mb-4" style="max-width:32rem;">The page you're looking for might have been moved, renamed, or doesn't exist. Let's get you back on track.</p>
+    <div class="d-flex flex-wrap gap-3 justify-content-center mb-5">
+      <a href="index.html" class="btn btn-gradient btn-lg"><i class="bi bi-house-door me-2"></i>Back to Home</a>
+      <a href="contact.html" class="btn btn-outline-secondary border-ap btn-lg"><i class="bi bi-headset me-2"></i>Contact Support</a>
+    </div>
+    <div class="mx-auto" style="max-width:26rem;">
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input type="search" class="form-control" placeholder="Search courses, blog, pages…">
+        <button class="btn btn-gradient" type="button">Search</button>
+      </div>
+    </div>
+    <div class="d-flex flex-wrap gap-2 justify-content-center mt-4">
+      <a href="courses.html" class="chip">Courses</a>
+      <a href="fees.html" class="chip">Fees &amp; Pricing</a>
+      <a href="blog.html" class="chip">Blog</a>
+      <a href="faculty.html" class="chip">Faculty</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

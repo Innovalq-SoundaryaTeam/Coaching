@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "partials/head_common.html" %}
+</head>
+<body class="{{ body_class or '' }}">
+
+<button class="theme-toggle-btn auth-theme-toggle" data-theme-toggle type="button" title="Toggle dark / light mode">
+  <i class="bi bi-moon-stars" data-theme-icon></i>
+</button>
+
+<div class="auth-shell">
+  <div class="col-lg-6 d-none d-lg-flex auth-visual flex-column justify-content-between p-5">
+    <a href="index.html" class="navbar-brand text-white position-relative" style="z-index:2;">
+      <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>{{ site.name }}
+    </a>
+    <div class="position-relative" style="z-index:2;">
+      <h2 class="text-white display-6 fw-bold mb-3">Your next rank starts here.</h2>
+      <p class="text-white-50 mb-4 fs-5">Join 24,000+ students preparing for Banking, SSC, UPSC, JEE and NEET with live classes, adaptive mock tests and mentor guidance.</p>
+      <div class="d-flex gap-4">
+        <div>
+          <div class="h3 text-white fw-bold mb-0">3,200+</div>
+          <div class="text-white-50 small">Selections</div>
+        </div>
+        <div>
+          <div class="h3 text-white fw-bold mb-0">4.8/5</div>
+          <div class="text-white-50 small">Student rating</div>
+        </div>
+        <div>
+          <div class="h3 text-white fw-bold mb-0">85+</div>
+          <div class="text-white-50 small">Expert faculty</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-white-50 small position-relative mb-0" style="z-index:2;">&copy; <span id="footer-year"></span> {{ site.name }}. All rights reserved.</p>
+  </div>
+
+  <div class="col-lg-6 auth-form-col flex-grow-1">
+    <div class="auth-card">
+      <div class="d-lg-none mb-4 text-center">
+        <a href="index.html" class="navbar-brand justify-content-center d-inline-flex">
+          <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>{{ site.name }}
+        </a>
+      </div>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div>
+<script>document.getElementById('footer-year') && (document.getElementById('footer-year').textContent = new Date().getFullYear());</script>
+
+<script src="{{ rel }}assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ rel }}assets/js/main.js"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

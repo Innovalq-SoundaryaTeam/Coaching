@@ -1,0 +1,81 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <span class="chip active mb-2 d-inline-block">{{ test.category }} · {{ test.type }}</span>
+    <h1 class="h4 mb-0" data-q-title>{{ test.name }} — Question 1</h1>
+  </div>
+  <div class="d-flex align-items-center gap-3">
+    <div class="text-center">
+      <div class="fw-bold text-danger fs-5"><i class="bi bi-stopwatch me-1"></i><span id="testTimer">{{ '%02d:00' % test.duration }}</span></div>
+      <p class="text-muted small mb-0">Time remaining</p>
+    </div>
+    <button class="btn btn-gradient">Submit Test</button>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-8">
+    <div class="panel mb-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span class="chip">{{ test.attempt.section }}</span>
+        <span class="text-muted small">Marks: +{{ test.marks }} &nbsp;|&nbsp; Negative: -{{ test.negative }}</span>
+      </div>
+      <p class="fw-semibold mb-4">{{ test.attempt.question }}</p>
+
+      <div class="d-flex flex-column gap-2" data-options-group>
+        {% for label, text in test.attempt.options %}
+        <div class="option-row d-flex align-items-center gap-3 {{ 'selected' if label == test.attempt.selected else '' }}" data-option-row>
+          <span class="fw-bold text-muted" style="width:1.5rem;">{{ label }}</span>
+          <span>{{ text }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-4 gap-2">
+        <button class="btn btn-outline-secondary border-ap btn-sm" data-mark-review><i class="bi bi-bookmark me-1"></i>Mark for Review</button>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary border-ap btn-sm"><i class="bi bi-arrow-left me-1"></i>Previous</button>
+          <button class="btn btn-gradient btn-sm">Save &amp; Next<i class="bi bi-arrow-right ms-1"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="panel mb-3">
+      <h6 class="mb-3">Section: {{ test.attempt.section }}</h6>
+      <div class="d-flex flex-wrap gap-2" data-q-palette>
+        {% for i in range(1, test.questions + 1) %}
+        <button class="q-palette-btn {{ test.attempt.palette[i-1] }}">{{ i }}</button>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="panel">
+      <h6 class="mb-3">Legend</h6>
+      <div class="d-flex flex-column gap-2 small">
+        <div class="d-flex align-items-center gap-2"><span class="q-palette-btn answered" style="width:1.6rem;height:1.6rem;font-size:.65rem;"></span>Answered</div>
+        <div class="d-flex align-items-center gap-2"><span class="q-palette-btn not-answered" style="width:1.6rem;height:1.6rem;font-size:.65rem;"></span>Not answered</div>
+        <div class="d-flex align-items-center gap-2"><span class="q-palette-btn marked" style="width:1.6rem;height:1.6rem;font-size:.65rem;"></span>Marked for review</div>
+        <div class="d-flex align-items-center gap-2"><span class="q-palette-btn" style="width:1.6rem;height:1.6rem;font-size:.65rem;"></span>Not visited</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block extra_scripts %}
+<script>
+  (function(){
+    var totalSeconds = {{ test.duration }}*60 - 18;
+    var el = document.getElementById('testTimer');
+    setInterval(function(){
+      if (totalSeconds <= 0) return;
+      totalSeconds--;
+      var m = Math.floor(totalSeconds/60), s = totalSeconds % 60;
+      el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    }, 1000);
+  })();
+</script>
+{% endblock %}

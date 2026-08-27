@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "partials/head_common.html" %}
+</head>
+<body class="{{ body_class or '' }}">
+
+<nav class="navbar navbar-ap py-3">
+  <div class="container justify-content-between">
+    <a class="navbar-brand" href="index.html">
+      <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>{{ site.name }}
+    </a>
+    <div class="d-flex align-items-center gap-2">
+      <button class="theme-toggle-btn" data-theme-toggle type="button" title="Toggle dark / light mode">
+        <i class="bi bi-moon-stars" data-theme-icon></i>
+      </button>
+      <button class="rtl-toggle-btn" data-dir-toggle type="button" title="Toggle RTL / LTR">
+        <i class="bi bi-translate"></i>
+      </button>
+      <a href="index.html" class="btn btn-sm btn-outline-secondary border-ap d-none d-sm-inline-flex">
+        <i class="bi bi-arrow-left me-1"></i>Back home
+      </a>
+    </div>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer class="text-center py-4 text-muted small border-top border-ap">
+  &copy; <span id="footer-year"></span> {{ site.name }}. All rights reserved.
+</footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+
+<script src="{{ rel }}assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{ rel }}assets/js/main.js"></script>
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

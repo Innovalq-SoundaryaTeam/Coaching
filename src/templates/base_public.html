@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "partials/head_common.html" %}
+</head>
+<body class="{{ body_class or '' }}">
+
+{% include "partials/navbar.html" %}
+
+{% block content %}{% endblock %}
+
+{% include "partials/footer.html" %}
+
+<script src="{{ rel }}assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+{% if needs_charts %}<script src="{{ rel }}assets/vendor/chartjs/chart.umd.min.js"></script>{% endif %}
+<script src="{{ rel }}assets/js/main.js"></script>
+{% if needs_charts %}<script src="{{ rel }}assets/js/charts.js"></script>{% endif %}
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

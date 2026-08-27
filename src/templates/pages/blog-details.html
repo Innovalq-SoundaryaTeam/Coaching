@@ -1,0 +1,169 @@
+{% extends "base_public.html" %}
+{% block content %}
+
+<section class="section-sm bg-surface-2 border-bottom border-ap">
+  <div class="container">
+    <nav aria-label="breadcrumb" class="mb-3">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item"><a href="blog.html" class="text-muted">Blog</a></li>
+        <li class="breadcrumb-item active">{{ post.category_label }}</li>
+      </ol>
+    </nav>
+    <span class="chip active mb-3 d-inline-block">{{ post.category_label }}</span>
+    <h1 class="display-6 mb-3" style="max-width:48rem;">{{ post.title }}</h1>
+    <div class="d-flex flex-wrap align-items-center gap-3 text-muted small">
+      <span class="d-flex align-items-center gap-2"><img src="{{ rel }}{{ author_photo }}" class="rounded-circle" style="width:1.8rem;height:1.8rem;object-fit:cover;">{{ post.author }}</span>
+      <span><i class="bi bi-calendar3 me-1"></i>{{ post.date }}</span>
+      <span><i class="bi bi-clock me-1"></i>{{ post.read_time }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-8">
+        <div class="rounded-ap overflow-hidden shadow-ap mb-4">
+          <img src="{{ rel }}{{ post.image }}" class="img-fluid w-100" alt="{{ post.title }}">
+        </div>
+
+        <article class="mb-5">
+          <p class="lead">{{ post.excerpt }}</p>
+          <p class="text-muted">Most aspirants treat every topic in the syllabus as equally important — and that's the single biggest reason study plans fall apart by month two. The truth is that competitive exams reward strategic prioritization far more than raw hours studied. In this article, we break down exactly how our faculty helps students decide what to study first, what to revise weekly, and what to leave for the final month.</p>
+          <h4 class="mt-5 mb-3">Start with a diagnostic, not a textbook</h4>
+          <p class="text-muted">Before opening a single chapter, take a full diagnostic test. The goal isn't to score well — it's to generate a topic-wise accuracy map that tells you, objectively, where your 100 hours of study time will earn the most marks.</p>
+          <blockquote class="border-start border-4 border-primary ps-4 py-2 my-4 fst-italic text-muted">
+            "Students who diagnose before they plan consistently outperform students who study more but plan less." — {{ post.author }}
+          </blockquote>
+          <h4 class="mt-5 mb-3">Build a weighted weekly schedule</h4>
+          <p class="text-muted">Once you know your weak topics, allocate study blocks proportionally — not evenly. A topic worth 15 marks that you're scoring 40% on deserves more hours than a topic worth 5 marks you're already scoring 80% on.</p>
+          <ul class="text-muted">
+            <li>Week 1–4: Foundation building across all sections</li>
+            <li>Week 5–12: Weighted practice based on diagnostic results</li>
+            <li>Week 13–20: Full-length mock tests + targeted revision</li>
+            <li>Final 4 weeks: Rapid revision + previous year papers only</li>
+          </ul>
+          <h4 class="mt-5 mb-3">Review every mock test within 24 hours</h4>
+          <p class="text-muted">The real learning happens after the test, not during it. Spend at least 45 minutes reviewing every incorrect and unattempted question, and log recurring mistake patterns in your performance tracker.</p>
+        </article>
+
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          {% for tag in post.tags %}<span class="chip">{{ tag }}</span>{% endfor %}
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between border-top border-bottom border-ap py-3 mb-5">
+          <span class="fw-semibold small">Share this article</span>
+          <div class="d-flex gap-2">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ (site.url + '/' + post_url) | urlencode }}" target="_blank" rel="noopener" class="btn-icon btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com/intent/tweet?url={{ (site.url + '/' + post_url) | urlencode }}&text={{ post.title | urlencode }}" target="_blank" rel="noopener" class="btn-icon btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ (site.url + '/' + post_url) | urlencode }}" target="_blank" rel="noopener" class="btn-icon btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-linkedin"></i></a>
+            <button type="button" class="btn-icon btn btn-sm btn-outline-secondary border-ap" data-copy-link><i class="bi bi-link-45deg"></i></button>
+          </div>
+        </div>
+
+        <!-- Author bio -->
+        <div class="card-ap p-4 d-flex flex-row gap-3 align-items-center mb-5">
+          <img src="{{ rel }}{{ author_photo }}" class="rounded-circle flex-shrink-0" style="width:4rem;height:4rem;object-fit:cover;">
+          <div>
+            <h6 class="mb-1">{{ post.author }}</h6>
+            <p class="text-muted small mb-0">Faculty at LS Academy, writing on exam strategy and study planning.</p>
+          </div>
+        </div>
+
+        <!-- Comments -->
+        <div>
+          <h5 class="mb-4">3 Comments</h5>
+          {% for c in [
+            ("Rohit Sinha", "IBPS PO 2025 candidate", "This weighted schedule approach genuinely changed how I plan my week. Thank you for breaking it down so clearly!"),
+            ("Priyanka Das", "SSC CGL aspirant", "Could you do a follow-up article specifically on how to build the diagnostic test if we don't have access to a platform like this?"),
+            ("Amit Kulkarni", "UPSC aspirant", "The 24-hour mock test review rule is something I've been skipping. Trying it starting this week.")
+          ] %}
+          <div class="d-flex gap-3 mb-4">
+            <img src="{{ rel }}assets/images/commenter-{{ loop.index }}.jpg" class="rounded-circle flex-shrink-0" style="width:2.8rem;height:2.8rem;object-fit:cover;">
+            <div class="card-ap p-3 flex-grow-1">
+              <div class="d-flex justify-content-between mb-1">
+                <h6 class="mb-0 small">{{ c[0] }} <span class="text-muted fw-normal">&middot; {{ c[1] }}</span></h6>
+              </div>
+              <p class="text-muted small mb-0">{{ c[2] }}</p>
+            </div>
+          </div>
+          {% endfor %}
+
+          <form class="mt-4 needs-validation" novalidate data-demo-submit="Thanks! Your comment has been submitted for review.">
+            <h6 class="mb-3">Leave a comment</h6>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" required>
+                <div class="invalid-feedback">Please enter your name.</div>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" required>
+                <div class="invalid-feedback">Please enter a valid email.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Comment</label>
+                <textarea class="form-control" rows="4" required></textarea>
+                <div class="invalid-feedback">Please write a comment.</div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-gradient" type="submit">Post Comment</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-lg-4">
+        <div class="d-flex flex-column gap-4" style="position:sticky; top:6.5rem;">
+          <div class="panel">
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+              <input type="search" class="form-control" placeholder="Search articles…">
+            </div>
+          </div>
+          <div class="panel">
+            <h6 class="mb-3">Categories</h6>
+            <ul class="list-unstyled d-flex flex-column gap-2">
+              {% for c in exam_categories %}
+              <li><a href="blog.html" class="d-flex justify-content-between text-reset small"><span><i class="bi {{ c.icon }} me-2"></i>{{ c.name }}</span><span class="text-muted">({{ loop.index + 3 }})</span></a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="panel">
+            <h6 class="mb-3">Recent posts</h6>
+            <div class="d-flex flex-column gap-3">
+              {% for p in blog_posts[:3] %}
+              <a href="{{ blog_url(p) }}" class="d-flex gap-3 text-reset">
+                <img src="{{ rel }}{{ p.image }}" class="rounded-3 flex-shrink-0" style="width:4rem;height:3.2rem;object-fit:cover;">
+                <div>
+                  <h6 class="mb-1 small">{{ p.title }}</h6>
+                  <p class="text-muted mb-0" style="font-size:.75rem;">{{ p.date }}</p>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="panel">
+            <h6 class="mb-3">Popular tags</h6>
+            <div class="d-flex flex-wrap gap-2">
+              {% for tag in ["Strategy","Banking","SSC","UPSC","JEE","NEET","Mock Tests","Time Management","Answer Writing"] %}
+              <span class="chip">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="panel text-center" style="background:var(--ap-gradient);">
+            <h6 class="text-white mb-2">Free Mock Test</h6>
+            <p class="text-white-50 small mb-3">Try a full-length mock test on us — no card required.</p>
+            <a href="login.html" class="btn btn-white-soft w-100">Get Started</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

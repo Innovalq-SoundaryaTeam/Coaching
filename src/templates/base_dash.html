@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "partials/head_common.html" %}
+</head>
+<body class="{{ body_class or '' }}">
+
+<div class="dash-wrapper">
+  {% if dash_type == 'admin' %}
+    {% include "partials/sidebar_admin.html" %}
+  {% else %}
+    {% include "partials/sidebar_student.html" %}
+  {% endif %}
+
+  <div class="dash-main">
+    {% include "partials/topbar_dash.html" %}
+    <main class="dash-content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+
+<script src="{{ rel }}assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+{% if needs_charts %}<script src="{{ rel }}assets/vendor/chartjs/chart.umd.min.js"></script>{% endif %}
+<script src="{{ rel }}assets/js/main.js"></script>
+{% if needs_charts %}<script src="{{ rel }}assets/js/charts.js"></script>{% endif %}
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends "base_public.html" %}
+{% block content %}
+
+<section class="section-sm bg-surface-2 border-bottom border-ap">
+  <div class="container text-center">
+    <span class="eyebrow mb-3"><i class="bi bi-mortarboard"></i>Faculty</span>
+    <h1 class="display-6 mb-2">Learn from mentors who've cleared these exams</h1>
+    <p class="text-muted mx-auto mb-3" style="max-width:38rem;">Every faculty member at LS Academy combines subject mastery with first-hand exam experience.</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item active">Faculty</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="d-flex flex-wrap gap-2 justify-content-center mb-5">
+      <button class="chip active" data-faculty-filter="all">All Faculty</button>
+      {% for c in exam_categories %}
+      <button class="chip" data-faculty-filter="{{ c.slug }}">{{ c.name }}</button>
+      {% endfor %}
+    </div>
+    <div class="row g-4" data-faculty-grid>
+      {% for f in faculty %}
+      <div class="col-sm-6 col-lg-3 reveal" data-faculty-subject="{{ f.subject }}" style="transition-delay: {{ (loop.index0 % 4) * 60 }}ms;">
+        <div class="faculty-card h-100">
+          <div class="faculty-photo"><img src="{{ rel }}{{ f.photo }}" alt="{{ f.name }}"></div>
+          <div class="p-3">
+            <h6 class="mb-1">{{ f.name }}</h6>
+            <p class="text-primary-emphasis small mb-2">{{ f.role }}</p>
+            <p class="text-muted small mb-2">{{ f.qual }} &middot; {{ f.exp }} exp.</p>
+            <p class="text-muted small mb-3">{{ f.bio }}</p>
+            <div class="social-row d-flex justify-content-center gap-2">
+              <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
+              <a href="https://x.com" target="_blank" rel="noopener"><i class="bi bi-twitter-x"></i></a>
+              <a href="mailto:{{ site.email }}"><i class="bi bi-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section bg-surface-2 pt-0">
+  <div class="container">
+    <div class="rounded-ap p-5 text-center reveal" style="background:var(--ap-gradient);">
+      <h2 class="text-white mb-3">Want to teach with us?</h2>
+      <p class="text-white-50 mb-4 fs-5">We're always looking for exam-cleared subject experts to join our faculty team.</p>
+      <a href="contact.html" class="btn btn-white-soft btn-lg"><i class="bi bi-send me-2"></i>Apply to Teach</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block extra_scripts %}
+<script>
+  (function(){
+    var buttons = document.querySelectorAll('[data-faculty-filter]');
+    var cards = document.querySelectorAll('[data-faculty-subject]');
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        buttons.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var filter = btn.getAttribute('data-faculty-filter');
+        cards.forEach(function(card){
+          var show = filter === 'all' || card.getAttribute('data-faculty-subject') === filter;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
+{% endblock %}

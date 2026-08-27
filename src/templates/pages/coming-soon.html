@@ -1,0 +1,31 @@
+{% extends "base_minimal.html" %}
+{% block content %}
+<section class="hero-1 d-flex align-items-center" style="min-height:80vh; padding:2rem 0;">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="container text-center position-relative" style="z-index:1;">
+    <span class="eyebrow mb-4"><i class="bi bi-hourglass-split"></i>Coming Soon</span>
+    <h1 class="display-5 mb-3">Our new batch enrollment portal is almost ready.</h1>
+    <p class="text-muted mx-auto mb-5" style="max-width:34rem;">We're building a faster way to enroll, pick your exam category and start your free trial in under 2 minutes. Leave your email and we'll notify you the moment it's live.</p>
+
+    <div class="d-flex justify-content-center gap-2 gap-md-3 mb-5" data-countdown>
+      <div class="countdown-box"><div class="num" data-cd-days>00</div><div class="small text-muted">Days</div></div>
+      <div class="countdown-box"><div class="num" data-cd-hours>00</div><div class="small text-muted">Hours</div></div>
+      <div class="countdown-box"><div class="num" data-cd-mins>00</div><div class="small text-muted">Minutes</div></div>
+      <div class="countdown-box"><div class="num" data-cd-secs>00</div><div class="small text-muted">Seconds</div></div>
+    </div>
+
+    <form class="d-flex flex-wrap gap-2 justify-content-center mx-auto mb-5" style="max-width:28rem;" data-newsletter-form data-success-message="You're on the list! We'll email you the moment enrollment opens." onsubmit="return false;">
+      <input type="email" class="form-control flex-grow-1" placeholder="Enter your email" required>
+      <button class="btn btn-gradient flex-shrink-0" type="submit">Notify Me</button>
+    </form>
+
+    <div class="social-row d-flex justify-content-center gap-2">
+      <a href="https://facebook.com" target="_blank" rel="noopener" class="btn-icon btn btn-outline-secondary border-ap"><i class="bi bi-facebook"></i></a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="btn-icon btn btn-outline-secondary border-ap"><i class="bi bi-instagram"></i></a>
+      <a href="https://youtube.com" target="_blank" rel="noopener" class="btn-icon btn btn-outline-secondary border-ap"><i class="bi bi-youtube"></i></a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener" class="btn-icon btn btn-outline-secondary border-ap"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</section>
+{% endblock %}

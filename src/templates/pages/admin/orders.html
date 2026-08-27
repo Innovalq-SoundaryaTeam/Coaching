@@ -1,0 +1,89 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <h1 class="h3 mb-1">Orders &amp; Payments</h1>
+    <p class="text-muted mb-0">Track enrollments, payment status and refunds.</p>
+  </div>
+  <button class="btn btn-outline-secondary border-ap"><i class="bi bi-download me-2"></i>Export CSV</button>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(22,163,74,.12); color:var(--ap-success);"><i class="bi bi-check-circle"></i></span>
+      <div class="stat-value">1,102</div><p class="text-muted small mb-0">Successful</p>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(245,158,11,.15); color:var(--ap-accent);"><i class="bi bi-hourglass-split"></i></span>
+      <div class="stat-value">86</div><p class="text-muted small mb-0">Pending</p>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(225,29,72,.13); color:var(--ap-danger);"><i class="bi bi-x-circle"></i></span>
+      <div class="stat-value">34</div><p class="text-muted small mb-0">Failed</p>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(8,145,178,.13); color:var(--ap-info);"><i class="bi bi-arrow-counterclockwise"></i></span>
+      <div class="stat-value">26</div><p class="text-muted small mb-0">Refunded</p>
+    </div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="row g-3 align-items-center mb-3">
+    <div class="col-lg-4">
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input type="search" class="form-control" placeholder="Search by order ID or student…">
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+        <button class="chip active">All</button>
+        <button class="chip">Success</button>
+        <button class="chip">Pending</button>
+        <button class="chip">Failed</button>
+        <button class="chip">Refunded</button>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-ap align-middle mb-0">
+      <thead><tr><th>Order ID</th><th>Student</th><th>Plan</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        {% for o in admin_orders %}
+        <tr>
+          <td class="fw-semibold small">{{ o.id }}</td>
+          <td class="small">{{ o.student }}</td>
+          <td class="small text-muted">{{ o.plan }}</td>
+          <td class="fw-semibold">₹{{ '{:,}'.format(o.amount) }}</td>
+          <td class="small text-muted">{{ o.date }}</td>
+          <td><span class="status-pill {{ 'success' if o.status=='success' else ('warning' if o.status=='pending' else ('danger' if o.status in ['failed','refunded'] else 'neutral')) }}">{{ o.status | capitalize }}</span></td>
+          <td class="text-end"><button class="btn btn-sm btn-outline-secondary border-ap"><i class="bi bi-receipt"></i> Invoice</button></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <p class="text-muted small mb-0">Showing 1–8 of 1,248 orders</p>
+    <nav>
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+<footer class="footer-ap">
+  <div class="container">
+    <div class="row g-4 pb-4">
+      <div class="col-lg-4">
+        <a class="navbar-brand text-white mb-3 d-inline-flex" href="index.html">
+          <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>{{ site.name }}
+        </a>
+        <p class="opacity-75 mb-3">{{ site.tagline }}</p>
+        <div class="social-row d-flex gap-2">
+          <a href="https://facebook.com" target="_blank" rel="noopener"><i class="bi bi-facebook"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
+          <a href="https://x.com" target="_blank" rel="noopener"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Explore</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="faculty.html">Our Faculty</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Courses</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="courses.html#banking">Banking Exams</a></li>
+          <li><a href="courses.html#ssc">SSC Exams</a></li>
+          <li><a href="courses.html#civil-services">Civil Services</a></li>
+          <li><a href="courses.html#engineering">Engineering (JEE)</a></li>
+          <li><a href="courses.html#medical">Medical (NEET)</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6>Stay updated</h6>
+        <p class="opacity-75 mb-3">Get exam alerts, free study material and mock-test invites in your inbox.</p>
+        <form class="d-flex gap-2 footer-newsletter" data-newsletter-form data-success-message="Subscribed! You'll start getting exam alerts and study material in your inbox." onsubmit="return false;">
+          <input type="email" class="form-control" placeholder="Enter your email" required>
+          <button class="btn btn-gradient flex-shrink-0" type="submit">Subscribe</button>
+        </form>
+        <ul class="list-unstyled footer-links mt-3 small">
+          <li><i class="bi bi-geo-alt me-2"></i>{{ site.address }}</li>
+          <li><i class="bi bi-telephone me-2"></i>{{ site.phone }}</li>
+          <li><i class="bi bi-envelope me-2"></i>{{ site.email }}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <p class="mb-0 opacity-75">&copy; <span id="footer-year"></span> {{ site.name }}. All rights reserved.</p>
+      <ul class="list-unstyled d-flex gap-3 mb-0 opacity-75">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="admin/dashboard.html">Admin Demo</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+<button class="back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>

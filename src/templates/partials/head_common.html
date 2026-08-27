@@ -1,0 +1,28 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }} | {{ site.name }}</title>
+<meta name="description" content="{{ meta_description or site.tagline }}">
+<meta name="keywords" content="competitive exam coaching, banking exam coaching, SSC coaching, UPSC coaching, civil services coaching, JEE coaching, NEET coaching, online mock tests, {{ site.name }}">
+<meta name="author" content="{{ site.name }}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ site.url }}/{{ page_id }}.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title }} | {{ site.name }}">
+<meta property="og:description" content="{{ meta_description or site.tagline }}">
+<meta property="og:image" content="{{ site.url }}/{{ site.og_image }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ title }} | {{ site.name }}">
+<meta name="twitter:description" content="{{ meta_description or site.tagline }}">
+
+<!-- Favicon (inline SVG mark, replace with your own /favicon.ico in production) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234338ca'/%3E%3Cpath d='M16 7l7 18h-4l-1.4-4h-7.2L9 25H5l7-18h4zm-3.6 10.6h5.2L15 12.4l-2.6 5.2z' fill='white'/%3E%3C/svg%3E">
+
+<!-- Bootstrap 5.3 (includes native dark mode via data-bs-theme + RTL stylesheet swapped by JS) -->
+<!-- Vendored locally under assets/vendor so the template works offline / without a CDN dependency. -->
+<link id="bootstrap-css" rel="stylesheet" href="{{ rel }}assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{ rel }}assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="{{ rel }}assets/css/style.css">
+{% block extra_head %}{% endblock %}

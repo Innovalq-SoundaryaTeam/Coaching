@@ -1,0 +1,134 @@
+{% extends "base_public.html" %}
+{% block content %}
+
+<section class="section-sm bg-surface-2 border-bottom border-ap">
+  <div class="container text-center">
+    <span class="eyebrow mb-3"><i class="bi bi-trophy"></i>Results</span>
+    <h1 class="display-6 mb-2">Results that speak for themselves</h1>
+    <p class="text-muted mx-auto mb-3" style="max-width:38rem;">Every rank below is from a verified LS Academy student. Filter by exam category to see students preparing your way.</p>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
+        <li class="breadcrumb-item active">Results</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<section class="stat-strip py-4">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-6 col-lg-3">
+        <div class="stat-num"><span data-counter="3200" data-suffix="+">0</span></div>
+        <p class="text-muted mb-0 small">Total selections</p>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-num"><span data-counter="142">0</span></div>
+        <p class="text-muted mb-0 small">Top-500 all-India ranks</p>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-num"><span data-counter="96" data-suffix="%">0</span></div>
+        <p class="text-muted mb-0 small">Selection rate (Elite plan)</p>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-num"><span data-counter="18">0</span></div>
+        <p class="text-muted mb-0 small">Consecutive result years</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHART + FILTER -->
+<section class="section">
+  <div class="container">
+    <div class="row g-4 mb-5">
+      <div class="col-lg-5 reveal">
+        <div class="panel h-100">
+          <h5 class="mb-1">Selections by exam category</h5>
+          <p class="text-muted small mb-3">Cumulative selections across all batches</p>
+          <div style="height:260px;"><canvas id="chartExamCategories"></canvas></div>
+        </div>
+      </div>
+      <div class="col-lg-7 reveal">
+        <div class="panel h-100">
+          <h5 class="mb-3">Filter results</h5>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <button class="chip active" data-result-filter="all">All Exams</button>
+            {% for c in exam_categories %}
+            <button class="chip" data-result-filter="{{ c.slug }}">{{ c.name }}</button>
+            {% endfor %}
+          </div>
+          <div class="row g-3" data-result-grid>
+            {% for r in results[:4] %}
+            <div class="col-6" data-result-course="{{ r.course }}">
+              <div class="d-flex align-items-center gap-3 card-ap p-3">
+                <img src="{{ rel }}{{ r.photo }}" class="rounded-circle" style="width:2.8rem;height:2.8rem;object-fit:cover;" alt="{{ r.name }}">
+                <div>
+                  <h6 class="mb-0 small">{{ r.name }}</h6>
+                  <p class="text-muted mb-0" style="font-size:.78rem;">{{ r.rank }}</p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FULL RESULT GRID -->
+    <div class="d-flex flex-wrap gap-2 justify-content-center mb-5">
+      <button class="chip active" data-results-full-filter="all">All Results</button>
+      {% for c in exam_categories %}
+      <button class="chip" data-results-full-filter="{{ c.slug }}">{{ c.name }}</button>
+      {% endfor %}
+    </div>
+    <div class="row g-4" data-results-full-grid>
+      {% for r in results %}
+      <div class="col-6 col-md-4 col-lg-3 reveal" data-results-full-course="{{ r.course }}" style="transition-delay: {{ (loop.index0 % 4) * 40 }}ms;">
+        <div class="result-card h-100">
+          <img src="{{ rel }}{{ r.photo }}" class="rounded-circle mb-3" style="width:4.5rem;height:4.5rem;object-fit:cover;" alt="{{ r.name }}">
+          <h6 class="mb-1">{{ r.name }}</h6>
+          <p class="text-muted small mb-2">{{ r.exam }}</p>
+          <span class="rank-badge">{{ r.rank }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section bg-surface-2 pt-0">
+  <div class="container">
+    <div class="rounded-ap p-5 text-center reveal" style="background:var(--ap-gradient);">
+      <h2 class="text-white mb-3">Your name could be here next.</h2>
+      <p class="text-white-50 mb-4 fs-5">Start with a free diagnostic test and see exactly where you stand today.</p>
+      <a href="contact.html" class="btn btn-white-soft btn-lg"><i class="bi bi-calendar-check me-2"></i>Book Free Demo</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block extra_scripts %}
+<script>
+  (function(){
+    function wire(filterAttr, gridAttr, courseAttr){
+      var buttons = document.querySelectorAll('[' + filterAttr + ']');
+      var cards = document.querySelectorAll('[' + courseAttr + ']');
+      buttons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          buttons.forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          var filter = btn.getAttribute(filterAttr);
+          cards.forEach(function(card){
+            var show = filter === 'all' || card.getAttribute(courseAttr) === filter;
+            card.style.display = show ? '' : 'none';
+          });
+        });
+      });
+    }
+    wire('data-result-filter', 'data-result-grid', 'data-result-course');
+    wire('data-results-full-filter', 'data-results-full-grid', 'data-results-full-course');
+  })();
+</script>
+{% endblock %}

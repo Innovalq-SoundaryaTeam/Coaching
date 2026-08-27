@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login / Register | LS Academy</title>
+<meta name="description" content="Sign in to your LS Academy student dashboard or create a new account.">
+<meta name="keywords" content="competitive exam coaching, banking exam coaching, SSC coaching, UPSC coaching, civil services coaching, JEE coaching, NEET coaching, online mock tests, LS Academy">
+<meta name="author" content="LS Academy">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ls-academy.example.com/login.html">
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Login / Register | LS Academy">
+<meta property="og:description" content="Sign in to your LS Academy student dashboard or create a new account.">
+<meta property="og:image" content="https://ls-academy.example.com/assets/images/ls-academy-og.jpg">
+<meta property="og:site_name" content="LS Academy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Login / Register | LS Academy">
+<meta name="twitter:description" content="Sign in to your LS Academy student dashboard or create a new account.">
+
+<!-- Favicon (inline SVG mark, replace with your own /favicon.ico in production) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234338ca'/%3E%3Cpath d='M16 7l7 18h-4l-1.4-4h-7.2L9 25H5l7-18h4zm-3.6 10.6h5.2L15 12.4l-2.6 5.2z' fill='white'/%3E%3C/svg%3E">
+
+<!-- Bootstrap 5.3 (includes native dark mode via data-bs-theme + RTL stylesheet swapped by JS) -->
+<!-- Vendored locally under assets/vendor so the template works offline / without a CDN dependency. -->
+<link id="bootstrap-css" rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="">
+
+<button class="theme-toggle-btn auth-theme-toggle" data-theme-toggle type="button" title="Toggle dark / light mode">
+  <i class="bi bi-moon-stars" data-theme-icon></i>
+</button>
+
+<div class="auth-shell">
+  <div class="col-lg-6 d-none d-lg-flex auth-visual flex-column justify-content-between p-5">
+    <a href="index.html" class="navbar-brand text-white position-relative" style="z-index:2;">
+      <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>LS Academy
+    </a>
+    <div class="position-relative" style="z-index:2;">
+      <h2 class="text-white display-6 fw-bold mb-3">Your next rank starts here.</h2>
+      <p class="text-white-50 mb-4 fs-5">Join 24,000+ students preparing for Banking, SSC, UPSC, JEE and NEET with live classes, adaptive mock tests and mentor guidance.</p>
+      <div class="d-flex gap-4">
+        <div>
+          <div class="h3 text-white fw-bold mb-0">3,200+</div>
+          <div class="text-white-50 small">Selections</div>
+        </div>
+        <div>
+          <div class="h3 text-white fw-bold mb-0">4.8/5</div>
+          <div class="text-white-50 small">Student rating</div>
+        </div>
+        <div>
+          <div class="h3 text-white fw-bold mb-0">85+</div>
+          <div class="text-white-50 small">Expert faculty</div>
+        </div>
+      </div>
+    </div>
+    <p class="text-white-50 small position-relative mb-0" style="z-index:2;">&copy; <span id="footer-year"></span> LS Academy. All rights reserved.</p>
+  </div>
+
+  <div class="col-lg-6 auth-form-col flex-grow-1">
+    <div class="auth-card">
+      <div class="d-lg-none mb-4 text-center">
+        <a href="index.html" class="navbar-brand justify-content-center d-inline-flex">
+          <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>LS Academy
+        </a>
+      </div>
+
+<ul class="nav nav-pills mb-4 bg-surface-2 p-1 rounded-pill" id="authTabs" role="tablist">
+  <li class="nav-item flex-fill" role="presentation">
+    <button class="nav-link w-100 rounded-pill active" data-bs-toggle="tab" data-bs-target="#tab-login" type="button">Login</button>
+  </li>
+  <li class="nav-item flex-fill" role="presentation">
+    <button class="nav-link w-100 rounded-pill" data-bs-toggle="tab" data-bs-target="#tab-register" type="button">Register</button>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <!-- LOGIN -->
+  <div class="tab-pane fade show active" id="tab-login">
+    <h3 class="mb-1">Welcome back</h3>
+    <p class="text-muted mb-4">Log in to access your dashboard, mock tests and study material.</p>
+
+    <div class="row g-2 mb-4">
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would continue with Google.">
+          <i class="bi bi-google"></i>Google
+        </button>
+      </div>
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would continue with Apple.">
+          <i class="bi bi-apple"></i>Apple
+        </button>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <hr class="flex-grow-1 border-ap"><span class="text-muted small">or continue with email</span><hr class="flex-grow-1 border-ap">
+    </div>
+
+    <form class="needs-validation" novalidate data-demo-submit="Demo template — this would sign you into your dashboard.">
+      <div class="mb-3">
+        <label class="form-label">Email or student ID</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="text" class="form-control" placeholder="you@example.com" required>
+          <div class="invalid-feedback">Please enter your email or student ID.</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Enter password" required minlength="6">
+          <button class="btn btn-outline-secondary border-ap" type="button" data-toggle-password="#loginPassword"><i class="bi bi-eye"></i></button>
+          <div class="invalid-feedback">Password must be at least 6 characters.</div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="rememberMe">
+          <label class="form-check-label small" for="rememberMe">Remember me</label>
+        </div>
+        <a href="#" class="small">Forgot password?</a>
+      </div>
+      <button class="btn btn-gradient w-100 mb-3" type="submit">Log In</button>
+      <div class="row g-2 text-center">
+        <div class="col-6"><a href="student/dashboard.html" class="btn btn-outline-secondary border-ap w-100 btn-sm">Student Demo</a></div>
+        <div class="col-6"><a href="admin/dashboard.html" class="btn btn-outline-secondary border-ap w-100 btn-sm">Admin Demo</a></div>
+      </div>
+    </form>
+  </div>
+
+  <!-- REGISTER -->
+  <div class="tab-pane fade" id="tab-register">
+    <h3 class="mb-1">Create your account</h3>
+    <p class="text-muted mb-4">Get 3 free mock tests the moment you sign up.</p>
+
+    <div class="row g-2 mb-4">
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would sign up with Google.">
+          <i class="bi bi-google"></i>Google
+        </button>
+      </div>
+      <div class="col-sm-6">
+        <button class="btn btn-outline-secondary border-ap w-100 d-flex align-items-center justify-content-center gap-2" type="button" data-toast-btn="Demo template — this would sign up with Apple.">
+          <i class="bi bi-apple"></i>Apple
+        </button>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <hr class="flex-grow-1 border-ap"><span class="text-muted small">or sign up with email</span><hr class="flex-grow-1 border-ap">
+    </div>
+
+    <form class="needs-validation" novalidate data-demo-submit="Demo template — this would create your account.">
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label class="form-label">Full name</label>
+          <input type="text" class="form-control" placeholder="Your name" required>
+          <div class="invalid-feedback">Please enter your name.</div>
+        </div>
+        <div class="col-sm-6">
+          <label class="form-label">Phone number</label>
+          <input type="tel" class="form-control" placeholder="+91 98765 43210" required pattern="[0-9+ ]{7,15}">
+          <div class="invalid-feedback">Please enter a valid phone number.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Email address</label>
+          <input type="email" class="form-control" placeholder="you@example.com" required>
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Target exam category</label>
+          <select class="form-select" required>
+            <option value="" selected disabled>Choose an exam category</option>
+            <option>Banking Exams</option>
+            <option>SSC Exams</option>
+            <option>Civil Services (UPSC)</option>
+            <option>Engineering Entrance (JEE)</option>
+            <option>Medical Entrance (NEET)</option>
+          </select>
+          <div class="invalid-feedback">Please select a category.</div>
+        </div>
+        <div class="col-12">
+          <label class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input type="password" class="form-control" id="registerPassword" placeholder="Create a password" required minlength="6">
+            <button class="btn btn-outline-secondary border-ap" type="button" data-toggle-password="#registerPassword"><i class="bi bi-eye"></i></button>
+            <div class="invalid-feedback">Password must be at least 6 characters.</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+            <label class="form-check-label small" for="agreeTerms">I agree to the Terms of Service and Privacy Policy</label>
+            <div class="invalid-feedback">You must agree before continuing.</div>
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn-gradient w-100" type="submit">Create Account</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+<script>document.getElementById('footer-year') && (document.getElementById('footer-year').textContent = new Date().getFullYear());</script>
+
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

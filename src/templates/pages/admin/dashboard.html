@@ -1,0 +1,164 @@
+{% extends "base_dash.html" %}
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+  <div>
+    <h1 class="h3 mb-1">Welcome back, {{ user.name.split(' ')[0] }}</h1>
+    <p class="text-muted mb-0">Here's what's happening across LS Academy today.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-secondary border-ap"><i class="bi bi-download me-2"></i>Export Report</button>
+    <a href="courses.html" class="btn btn-gradient"><i class="bi bi-plus-lg me-2"></i>Add Course</a>
+  </div>
+</div>
+
+<!-- STAT WIDGETS -->
+<div class="row g-3 mb-4">
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(var(--ap-primary-rgb),.12); color:var(--ap-primary);"><i class="bi bi-people"></i></span>
+      <div class="stat-value">24,186</div>
+      <p class="text-muted small mb-1">Total students</p>
+      <span class="small trend-up"><i class="bi bi-arrow-up-short"></i>+312 this month</span>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(22,163,74,.12); color:var(--ap-success);"><i class="bi bi-currency-rupee"></i></span>
+      <div class="stat-value">₹45.5L</div>
+      <p class="text-muted small mb-1">Revenue this month</p>
+      <span class="small trend-up"><i class="bi bi-arrow-up-short"></i>+18.2%</span>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(245,158,11,.15); color:var(--ap-accent);"><i class="bi bi-receipt"></i></span>
+      <div class="stat-value">1,248</div>
+      <p class="text-muted small mb-1">Orders this month</p>
+      <span class="small trend-down"><i class="bi bi-arrow-down-short"></i>-3.1%</span>
+    </div>
+  </div>
+  <div class="col-6 col-lg-3">
+    <div class="stat-widget">
+      <span class="stat-icon mb-3" style="background:rgba(8,145,178,.13); color:var(--ap-info);"><i class="bi bi-chat-dots"></i></span>
+      <div class="stat-value">12</div>
+      <p class="text-muted small mb-1">Unread messages</p>
+      <span class="small text-muted">6 need response today</span>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-8">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Revenue &amp; enrollment trend</h5>
+        <select class="form-select form-select-sm" style="width:auto;">
+          <option>Last 12 months</option>
+          <option>Last 6 months</option>
+          <option>Last 30 days</option>
+        </select>
+      </div>
+      <div style="height:280px;"><canvas id="chartRevenueTrend"></canvas></div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="panel h-100">
+      <h5 class="panel-title mb-3">Students by exam category</h5>
+      <div style="height:230px;"><canvas id="chartExamCategories"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-lg-5">
+    <div class="panel h-100">
+      <h5 class="panel-title mb-3">Weekly active students</h5>
+      <div style="height:220px;"><canvas id="chartWeeklyActive"></canvas></div>
+    </div>
+  </div>
+  <div class="col-lg-7">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Recent orders</h5>
+        <a href="orders.html" class="small">View all <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-ap mb-0">
+          <thead><tr><th>Student</th><th>Plan</th><th>Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            {% for o in admin_orders[:5] %}
+            <tr>
+              <td class="fw-semibold">{{ o.student }}</td>
+              <td class="text-muted small">{{ o.plan }}</td>
+              <td>₹{{ '{:,}'.format(o.amount) }}</td>
+              <td>
+                <span class="status-pill {{ 'success' if o.status=='success' else ('warning' if o.status=='pending' else ('danger' if o.status in ['failed','refunded'] else 'neutral')) }}">{{ o.status | capitalize }}</span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <div class="col-lg-7">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Recently joined students</h5>
+        <a href="students.html" class="small">View all <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-ap mb-0">
+          <thead><tr><th>Student</th><th>Course</th><th>Joined</th><th>Status</th></tr></thead>
+          <tbody>
+            {% for s in admin_students[:5] %}
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <img src="{{ rel }}{{ s.avatar }}" class="avatar-sm" alt="{{ s.name }}">
+                  <div>
+                    <p class="mb-0 small fw-semibold">{{ s.name }}</p>
+                    <p class="mb-0 text-muted" style="font-size:.75rem;">{{ s.email }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="small">{{ s.course }}</td>
+              <td class="small text-muted">{{ s.joined }}</td>
+              <td><span class="status-pill {{ 'success' if s.status=='active' else ('warning' if s.status=='trial' else 'danger') }}">{{ s.status | capitalize }}</span></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="panel h-100">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="panel-title">Unread messages</h5>
+        <a href="messages.html" class="small">Inbox <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="d-flex flex-column gap-3">
+        {% for m in admin_messages[:4] %}
+        <div class="d-flex gap-3">
+          <img src="{{ rel }}{{ m.avatar }}" class="avatar-sm flex-shrink-0" alt="{{ m.name }}">
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between">
+              <h6 class="mb-0 small">{{ m.name }}</h6>
+              <span class="text-muted" style="font-size:.72rem;">{{ m.time }}</span>
+            </div>
+            <p class="mb-0 small text-truncate" style="max-width:16rem;">{{ m.subject }}</p>
+          </div>
+          {% if m.unread %}<span class="badge bg-primary rounded-pill align-self-center" style="width:.5rem;height:.5rem;padding:0;"></span>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
