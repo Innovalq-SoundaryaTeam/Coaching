@@ -89,6 +89,11 @@ a{ text-decoration:none; }
 }
 .section{ padding:5.5rem 0; }
 .section-sm{ padding:3.25rem 0; }
+/* Page-header band used at the top of every inner page (not the Home pages):
+   a shared min-height + vertical centering keeps this band the same height
+   everywhere, no matter how much title/tagline/breadcrumb content each page has. */
+.page-header{ min-height:21rem; display:flex; align-items:center; }
+.page-header > .container{ width:100%; }
 @media (max-width:767.98px){ .section{ padding:3.5rem 0; } }
 
 .eyebrow{
