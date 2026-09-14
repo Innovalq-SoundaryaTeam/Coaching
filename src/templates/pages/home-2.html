@@ -160,12 +160,12 @@
           <p class="text-muted small mb-3">{{ plan.tagline }}</p>
           <div class="price mb-1">₹{{ '{:,}'.format(plan.monthly) }}<span class="fs-6 text-muted fw-normal">/mo</span></div>
           <p class="text-muted small mb-4">or ₹{{ '{:,}'.format(plan.yearly) }} billed yearly</p>
-          <a href="fees.html" class="btn {{ 'btn-gradient' if plan.popular else 'btn-outline-secondary border-ap' }} w-100 mb-4">Choose {{ plan.name }}</a>
-          <ul>
+          <ul class="mb-4">
             {% for feat, included in plan.features %}
             <li class="{{ '' if included else 'disabled' }}"><i class="bi {{ 'bi-check-circle-fill' if included else 'bi-dash-circle' }}"></i>{{ feat }}</li>
             {% endfor %}
           </ul>
+          <a href="fees.html" class="btn {{ 'btn-gradient' if plan.popular else 'btn-outline-secondary border-ap' }} w-100 mt-auto">Choose {{ plan.name }}</a>
         </div>
       </div>
       {% endfor %}

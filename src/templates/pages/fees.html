@@ -33,12 +33,12 @@
           <div class="price mb-1" data-price-monthly>₹{{ '{:,}'.format(plan.monthly) }}<span class="fs-6 text-muted fw-normal">/mo</span></div>
           <div class="price mb-1" data-price-yearly style="display:none;">₹{{ '{:,}'.format(plan.yearly) }}<span class="fs-6 text-muted fw-normal">/yr</span></div>
           <p class="text-muted small mb-4">Applies to any single exam category</p>
-          <a href="contact.html" class="btn {{ 'btn-gradient' if plan.popular else 'btn-outline-secondary border-ap' }} w-100 mb-4">Get Started</a>
-          <ul>
+          <ul class="mb-4">
             {% for feat, included in plan.features %}
             <li class="{{ '' if included else 'disabled' }}"><i class="bi {{ 'bi-check-circle-fill' if included else 'bi-dash-circle' }}"></i>{{ feat }}</li>
             {% endfor %}
           </ul>
+          <a href="contact.html" class="btn {{ 'btn-gradient' if plan.popular else 'btn-outline-secondary border-ap' }} w-100 mt-auto">Get Started</a>
         </div>
       </div>
       {% endfor %}
