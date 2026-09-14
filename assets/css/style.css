@@ -96,6 +96,37 @@ a{ text-decoration:none; }
 .page-header > .container{ width:100%; }
 @media (max-width:767.98px){ .section{ padding:3.5rem 0; } }
 
+/* Page-header hero visual: an optional image/portrait/icon panel shown beside the
+   title text on select inner pages (About, Courses, Faculty, Results, Blog,
+   Contact, Fees) for a properly-balanced two-column banner. Hidden below lg so
+   the compact page-header band stays clean on narrower screens. */
+.page-header .ph-media-frame{
+  position:relative; border-radius:1.25rem; overflow:hidden; box-shadow:var(--ap-shadow); aspect-ratio:4/3;
+}
+.page-header .ph-media-frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+.page-header .ph-badge-chip{
+  position:absolute; z-index:2; background:var(--ap-surface); border:1px solid var(--ap-border);
+  border-radius:1rem; padding:.65rem .9rem; box-shadow:var(--ap-shadow); max-width:13rem;
+}
+.page-header .ph-portrait{
+  position:relative; display:flex; align-items:flex-end; justify-content:center; height:100%; min-height:13rem;
+}
+.page-header .ph-portrait::before{
+  content:""; position:absolute; width:12rem; height:12rem; border-radius:50%;
+  background:var(--ap-gradient); opacity:.16; top:.5rem; left:50%; transform:translateX(-50%);
+}
+.page-header .ph-portrait img{
+  position:relative; z-index:1; max-height:14.5rem; width:auto; object-fit:contain; object-position:bottom;
+  filter:drop-shadow(0 14px 20px rgba(20,20,40,.18));
+}
+.page-header .ph-icon-panel{
+  border-radius:1.25rem; padding:2.25rem 1.75rem; text-align:center; position:relative; overflow:hidden;
+  background:var(--ap-gradient); color:#fff; box-shadow:var(--ap-shadow);
+}
+.page-header .ph-icon-panel .icon-tile{ width:4.25rem; height:4.25rem; font-size:1.9rem; background:rgba(255,255,255,.18); color:#fff; margin:0 auto 1rem; }
+.page-header .ph-icon-panel h6{ color:#fff; }
+.page-header .ph-icon-panel p{ color:rgba(255,255,255,.75); }
+
 .eyebrow{
   display:inline-flex; align-items:center; gap:.5rem;
   font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
