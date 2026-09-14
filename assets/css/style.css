@@ -299,6 +299,15 @@ a{ text-decoration:none; }
 .testimonial-card .quote-mark{ font-family:Georgia, serif; font-size:3rem; line-height:1; color:rgba(var(--ap-primary-rgb),.25); }
 .testimonial-card .testimonial-meta{ flex:1 1 auto; min-width:0; }
 .testimonial-card .testimonial-rating{ flex-shrink:0; white-space:nowrap; }
+/* The result line ("SSC CGL 2025 · Selected, Income Tax Inspector") is the
+   longest of the three testimonials and was just a few pixels too wide for
+   its column, wrapping onto a second line while the other two cards' shorter
+   text stayed on one line. A touch smaller + nowrap keeps every card's result
+   line on a single line; the ellipsis is a safety net if a future name/result
+   pair ever runs even longer than this one. */
+.testimonial-card .testimonial-meta p{
+  font-size:.8125rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
 
 .result-card{ background:var(--ap-surface); border:1px solid var(--ap-border); border-radius:var(--ap-radius); padding:1.4rem; text-align:center; }
 .result-card .rank-badge{ background:var(--ap-gradient-accent); color:#20130a; font-weight:800; font-size:.78rem; padding:.25rem .7rem; border-radius:50rem; display:inline-block; }
