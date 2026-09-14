@@ -126,13 +126,13 @@ a{ text-decoration:none; }
   transition:box-shadow .25s ease, padding .25s ease, background-color .25s ease;
 }
 .navbar-ap.is-scrolled{ box-shadow:var(--ap-shadow-sm); border-bottom-color:var(--ap-border); padding:.55rem 0; }
-.navbar-brand{ font-family:var(--font-heading); font-weight:800; font-size:1.4rem; color:var(--ap-text); display:flex; align-items:center; gap:.55rem; }
+.navbar-brand{ font-family:var(--font-heading); font-weight:800; font-size:1.4rem; color:var(--ap-text); display:flex; align-items:center; gap:.55rem; flex-shrink:0; }
 .brand-mark{
   width:2.35rem; height:2.35rem; border-radius:.65rem; background:var(--ap-gradient);
   display:inline-flex; align-items:center; justify-content:center; color:#fff; font-size:1.15rem;
   flex-shrink:0;
 }
-.navbar-ap .nav-link{ font-weight:600; color:var(--ap-text); padding:.55rem 1rem !important; border-radius:.5rem; }
+.navbar-ap .nav-link{ font-weight:600; color:var(--ap-text); padding:.55rem .65rem !important; border-radius:.5rem; white-space:nowrap; }
 .navbar-ap .nav-link:hover, .navbar-ap .nav-link.active{ color:var(--ap-primary); }
 .navbar-ap .dropdown-menu{ border:1px solid var(--ap-border); box-shadow:var(--ap-shadow); border-radius:.9rem; padding:.6rem; background:var(--ap-surface); }
 .navbar-ap .dropdown-item{ border-radius:.55rem; padding:.55rem .8rem; font-weight:600; color:var(--ap-text); }
@@ -149,6 +149,7 @@ a{ text-decoration:none; }
 .theme-toggle-btn, .rtl-toggle-btn{
   width:2.5rem; height:2.5rem; border-radius:50%; border:1px solid var(--ap-border);
   background:var(--ap-surface-2); display:inline-flex; align-items:center; justify-content:center; color:var(--ap-text);
+  flex-shrink:0;
 }
 
 /* -------------------------------------------------------------------------
