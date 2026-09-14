@@ -231,13 +231,15 @@
         <div class="testimonial-card">
           <div class="quote-mark">&ldquo;</div>
           <p class="mb-4">{{ t.quote }}</p>
-          <div class="d-flex align-items-center gap-3">
-            <img src="{{ rel }}{{ t.photo }}" class="rounded-circle" style="width:3rem;height:3rem;object-fit:cover;" alt="{{ t.name }}">
-            <div>
-              <h6 class="mb-0">{{ t.name }}</h6>
+          <div class="d-flex align-items-start gap-3">
+            <img src="{{ rel }}{{ t.photo }}" class="rounded-circle flex-shrink-0" style="width:3rem;height:3rem;object-fit:cover;" alt="{{ t.name }}">
+            <div class="testimonial-meta">
+              <div class="d-flex align-items-center justify-content-between gap-2">
+                <h6 class="mb-0">{{ t.name }}</h6>
+                <div class="text-warning testimonial-rating" data-rating="{{ t.rating }}"></div>
+              </div>
               <p class="text-muted small mb-0">{{ t.result }}</p>
             </div>
-            <div class="ms-auto text-warning" data-rating="{{ t.rating }}"></div>
           </div>
         </div>
       </div>
