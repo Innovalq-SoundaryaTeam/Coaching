@@ -145,6 +145,18 @@ a{ text-decoration:none; }
 .navbar-transparent .navbar-brand{ color:#fff; }
 .navbar-transparent.is-scrolled{ position:sticky; background:var(--ap-surface); }
 .navbar-transparent.is-scrolled .nav-link, .navbar-transparent.is-scrolled .navbar-brand{ color:var(--ap-text); }
+/* Active page indicator over the hero (unscrolled): plain white text blends into
+   the dark hero background, so give it a bold weight + an accent underline instead
+   of relying on the primary color, which has too little contrast here. */
+.navbar-transparent .nav-link.active{ color:#fff; font-weight:800; position:relative; }
+.navbar-transparent .nav-link.active::after{
+  content:""; position:absolute; left:.65rem; right:.65rem; bottom:.3rem;
+  height:2px; border-radius:2px; background:var(--ap-accent);
+}
+/* Once scrolled, the navbar becomes a normal solid surface, so the active link
+   can go back to the standard primary-color highlight used on every other page. */
+.navbar-transparent.is-scrolled .nav-link.active{ color:var(--ap-primary); font-weight:700; }
+.navbar-transparent.is-scrolled .nav-link.active::after{ display:none; }
 
 .theme-toggle-btn, .rtl-toggle-btn{
   width:2.5rem; height:2.5rem; border-radius:50%; border:1px solid var(--ap-border);
