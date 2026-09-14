@@ -173,6 +173,16 @@ a{ text-decoration:none; }
 .navbar-ap .dropdown-menu{ border:1px solid var(--ap-border); box-shadow:var(--ap-shadow); border-radius:.9rem; padding:.6rem; background:var(--ap-surface); }
 .navbar-ap .dropdown-item{ border-radius:.55rem; padding:.55rem .8rem; font-weight:600; color:var(--ap-text); }
 .navbar-ap .dropdown-item:hover{ background:rgba(var(--ap-primary-rgb),.1); color:var(--ap-primary); }
+/* "Courses" is a real page, so its main-nav label needs to actually navigate
+   there — but Bootstrap's dropdown JS calls preventDefault() on ANY click of
+   a data-bs-toggle="dropdown" element regardless of href, which made the
+   combined label+toggle link "static" (it only ever opened the dropdown,
+   never navigated). Split it into two adjacent controls that render as one
+   "Courses ▾" nav item: the label link navigates normally, and a small
+   caret-only control next to it opens the category dropdown. */
+.nav-item-split{ display:flex; align-items:center; }
+.nav-item-split > .nav-link:first-child{ padding-right:.3rem !important; }
+.nav-item-split > .dropdown-toggle{ padding-left:.15rem !important; padding-right:.55rem !important; }
 .mega-menu{ border:1px solid var(--ap-border); box-shadow:var(--ap-shadow); border-radius:1rem; padding:1.5rem; background:var(--ap-surface); }
 .mega-menu .mega-title{ font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; font-weight:800; color:var(--ap-text-muted); margin-bottom:.75rem; }
 
