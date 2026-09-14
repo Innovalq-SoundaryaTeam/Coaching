@@ -85,12 +85,12 @@
       </div>
       <div class="table-responsive">
         <table class="table table-ap mb-0">
-          <thead><tr><th>Student</th><th>Plan</th><th>Amount</th><th>Status</th></tr></thead>
+          <thead><tr><th>Student</th><th class="d-none d-sm-table-cell">Plan</th><th>Amount</th><th>Status</th></tr></thead>
           <tbody>
             {% for o in admin_orders[:5] %}
             <tr>
               <td class="fw-semibold">{{ o.student }}</td>
-              <td class="text-muted small">{{ o.plan }}</td>
+              <td class="text-muted small d-none d-sm-table-cell">{{ o.plan }}</td>
               <td>₹{{ '{:,}'.format(o.amount) }}</td>
               <td>
                 <span class="status-pill {{ 'success' if o.status=='success' else ('warning' if o.status=='pending' else ('danger' if o.status in ['failed','refunded'] else 'neutral')) }}">{{ o.status | capitalize }}</span>
@@ -112,23 +112,23 @@
         <a href="students.html" class="small">View all <i class="bi bi-arrow-right"></i></a>
       </div>
       <div class="table-responsive">
-        <table class="table table-ap mb-0">
-          <thead><tr><th>Student</th><th>Course</th><th>Joined</th><th>Status</th></tr></thead>
+        <table class="table table-ap mb-0 table-fixed-sm">
+          <thead><tr><th>Student</th><th>Course</th><th class="d-none d-sm-table-cell">Joined</th><th class="d-none d-sm-table-cell">Status</th></tr></thead>
           <tbody>
             {% for s in admin_students[:5] %}
             <tr>
               <td>
                 <div class="d-flex align-items-center gap-2">
-                  <img src="{{ rel }}{{ s.avatar }}" class="avatar-sm" alt="{{ s.name }}">
-                  <div>
+                  <img src="{{ rel }}{{ s.avatar }}" class="avatar-sm flex-shrink-0" alt="{{ s.name }}">
+                  <div class="min-w-0">
                     <p class="mb-0 small fw-semibold">{{ s.name }}</p>
-                    <p class="mb-0 text-muted" style="font-size:.75rem;">{{ s.email }}</p>
+                    <p class="mb-0 text-muted text-truncate" style="font-size:.75rem;">{{ s.email }}</p>
                   </div>
                 </div>
               </td>
               <td class="small">{{ s.course }}</td>
-              <td class="small text-muted">{{ s.joined }}</td>
-              <td><span class="status-pill {{ 'success' if s.status=='active' else ('warning' if s.status=='trial' else 'danger') }}">{{ s.status | capitalize }}</span></td>
+              <td class="small text-muted d-none d-sm-table-cell">{{ s.joined }}</td>
+              <td class="d-none d-sm-table-cell"><span class="status-pill {{ 'success' if s.status=='active' else ('warning' if s.status=='trial' else 'danger') }}">{{ s.status | capitalize }}</span></td>
             </tr>
             {% endfor %}
           </tbody>

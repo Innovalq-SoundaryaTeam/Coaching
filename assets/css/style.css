@@ -192,12 +192,14 @@ a{ text-decoration:none; }
 .navbar-transparent.is-scrolled{ position:sticky; background:var(--ap-surface); }
 .navbar-transparent.is-scrolled .nav-link, .navbar-transparent.is-scrolled .navbar-brand{ color:var(--ap-text); }
 /* Active page indicator over the hero (unscrolled): plain white text blends into
-   the dark hero background, so give it a bold weight + an accent underline instead
-   of relying on the primary color, which has too little contrast here. */
-.navbar-transparent .nav-link.active{ color:#fff; font-weight:800; position:relative; }
+   the dark hero background, and the site's actual brand indigo (--ap-primary,
+   used for "active" everywhere else) is too dark to read here, so use a light
+   tint of that same indigo instead of switching to an unrelated accent hue --
+   it still reads as "the site's purple", just lightened for contrast. */
+.navbar-transparent .nav-link.active{ color:#a5b4fc; font-weight:800; position:relative; }
 .navbar-transparent .nav-link.active::after{
   content:""; position:absolute; left:.65rem; right:.65rem; bottom:.3rem;
-  height:2px; border-radius:2px; background:var(--ap-accent);
+  height:2px; border-radius:2px; background:#a5b4fc;
 }
 /* Once scrolled, the navbar becomes a normal solid surface, so the active link
    can go back to the standard primary-color highlight used on every other page. */
@@ -431,6 +433,12 @@ a{ text-decoration:none; }
 .table-ap tbody td{ padding:.9rem; vertical-align:middle; border-bottom:1px solid var(--ap-border); }
 .table-ap tbody tr:last-child td{ border-bottom:none; }
 .avatar-sm{ width:2.4rem; height:2.4rem; border-radius:50%; object-fit:cover; }
+.min-w-0{ min-width:0; }
+@media (max-width: 575.98px){
+  .table-fixed-sm{ table-layout:fixed; width:100%; }
+  .table-fixed-sm th:first-child, .table-fixed-sm td:first-child{ width:60%; }
+  .table-fixed-sm th:nth-child(2), .table-fixed-sm td:nth-child(2){ width:40%; }
+}
 .status-pill{ font-size:.72rem; font-weight:700; padding:.3rem .7rem; border-radius:50rem; display:inline-block; }
 .status-pill.success{ background:rgba(22,163,74,.13); color:var(--ap-success); }
 .status-pill.warning{ background:rgba(245,158,11,.15); color:#b45309; }
