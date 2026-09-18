@@ -109,8 +109,24 @@
       <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">Home 1 &mdash; General</a></li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="home-2.html">Home 2 &mdash; Online Prep</a></li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="about.html">About</a></li>
-      <li class="nav-item"><a class="nav-link fw-semibold" href="courses.html">Courses</a></li>
-      <li class="nav-item"><a class="nav-link fw-semibold" href="course-details.html">Course Details</a></li>
+      <li class="nav-item">
+        <div class="d-flex align-items-center">
+          <a class="nav-link fw-semibold flex-grow-1" href="courses.html">Courses</a>
+          <button class="offcanvas-subtoggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mobileCoursesSub" aria-expanded="false" aria-controls="mobileCoursesSub" aria-label="Show course categories">
+            <i class="bi bi-chevron-down"></i>
+          </button>
+        </div>
+        <div class="collapse" id="mobileCoursesSub">
+          <ul class="nav nav-pills flex-column gap-1 ps-3 py-1">
+            <li class="nav-item"><a class="nav-link small" href="courses.html#banking"><i class="bi bi-bank me-2"></i>Banking Exams</a></li>
+            <li class="nav-item"><a class="nav-link small" href="courses.html#ssc"><i class="bi bi-file-earmark-text me-2"></i>SSC Exams</a></li>
+            <li class="nav-item"><a class="nav-link small" href="courses.html#civil-services"><i class="bi bi-bank2 me-2"></i>Civil Services (UPSC)</a></li>
+            <li class="nav-item"><a class="nav-link small" href="courses.html#engineering"><i class="bi bi-gear me-2"></i>Engineering Entrance (JEE)</a></li>
+            <li class="nav-item"><a class="nav-link small" href="courses.html#medical"><i class="bi bi-heart-pulse me-2"></i>Medical Entrance (NEET)</a></li>
+            <li class="nav-item"><a class="nav-link small fw-bold" href="course-details.html">View sample course details</a></li>
+          </ul>
+        </div>
+      </li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="faculty.html">Faculty</a></li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="results.html">Results</a></li>
       <li class="nav-item"><a class="nav-link fw-semibold" href="fees.html">Fees &amp; Pricing</a></li>

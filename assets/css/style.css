@@ -494,6 +494,13 @@ a{ text-decoration:none; }
 [data-bs-theme="dark"] .map-frame{ filter:grayscale(.4) invert(.92) contrast(.9); }
 
 .offcanvas{ background:var(--ap-surface); color:var(--ap-text); }
+.offcanvas-subtoggle{
+  background:none; border:none; color:var(--ap-text-muted); width:2.6rem; height:2.6rem;
+  display:flex; align-items:center; justify-content:center; border-radius:.5rem; flex-shrink:0;
+}
+.offcanvas-subtoggle:hover{ background:var(--ap-surface-2); color:var(--ap-text); }
+.offcanvas-subtoggle i{ transition:transform .2s ease; }
+.offcanvas-subtoggle:not(.collapsed) i{ transform:rotate(180deg); }
 
 @media (max-width: 991.98px){
   .dash-sidebar{ position:fixed; z-index:1045; transform:translateX(-101%); left:0; top:0; box-shadow:var(--ap-shadow); }
